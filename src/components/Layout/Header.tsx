@@ -10,11 +10,12 @@ interface HeaderProps {
 }
 
 function Header({ toggleSidebar }: HeaderProps) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);  //Breakpoint
+  const [isMobile, setIsMobile] = useState(false);  //Breakpoint
 
   // Detect screen resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
