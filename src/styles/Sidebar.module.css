@@ -1,10 +1,24 @@
 .sidebar {
   width: 300px;
-  background-color: #3b3ca9;
+  background: linear-gradient(135deg, #2F3C7E, #4B5FCF);
   color: white;
   height: 100vh;
   transition: transform 0.3s ease;
 }
+
+.mobileOpen {
+  transform: translateX(0);
+}
+
+/* arrow */
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
 
 /* Desktop */
 @media screen and (min-width: 769px) {
@@ -28,7 +42,7 @@
   }
 }
 
-.nav-link.active-link {
+.activeLink {
   border-left: 4px solid #ffffff; /* white accent on left */
   background-color: transparent;
   padding-left: 0.75rem; /* adjust for border */

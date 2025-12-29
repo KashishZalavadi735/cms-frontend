@@ -17,7 +17,9 @@ function Layout({ children }: LayoutProps) {
             <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
             <div className="container p-0 inner-my">
-                {children}
+                <div className="px-5">
+                  {children}
+                </div>
             </div>
         </div>
     </div>
