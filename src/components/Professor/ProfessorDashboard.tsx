@@ -3,7 +3,7 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function AdminDashboard() {
+function ProfessorDashboard() {
   return (
     <div
       className="card shadow-sm border-0 py-5 px-4"
@@ -22,8 +22,8 @@ function AdminDashboard() {
             </div>
           </div>
           <div className="col">
-            <small className="text-light opacity-75">Admin ID</small>
-            <h6 className="text-white fw-bold">HOD_001</h6>
+            <small className="text-light opacity-75">Professor ID</small>
+            <h6 className="text-white fw-bold">PROF_001</h6>
           </div>
         </div>
         
@@ -31,7 +31,7 @@ function AdminDashboard() {
 
         <div className="row">
           <h5 className="text-white fw-bold mb-1">
-            Welcome back, Admin!
+            Welcome back, Professor!
           </h5>
           <small className="text-light">
             Here's your dashboard with all the important information.
@@ -41,7 +41,7 @@ function AdminDashboard() {
         
       </div>
     </div>
-  );
+  )
 }
 
-export default AdminDashboard;
+export default ProfessorDashboard

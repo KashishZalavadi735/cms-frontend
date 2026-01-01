@@ -28,7 +28,7 @@ function AddProfessorForm() {
               </div>
 
               <div className="col-12 col-md-6">
-                <label className="form-label">Email:</label>
+                <label className="form-label">Email</label>
                 <input type="email" className="form-control" />
               </div>
             </div>

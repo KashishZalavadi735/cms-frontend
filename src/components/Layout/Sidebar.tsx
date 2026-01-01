@@ -5,7 +5,9 @@ import {
   faChevronDown,
   faChevronRight,
   faCircleUser,
+  faFileLines,
   faGauge,
+  faIdCard,
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +25,8 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
   const router = useRouter();
   const [adminOpen, setAdminOpen] = useState(false);
   const [professorOpen, setProfessorOpen] = useState(false);
-
+  const [assignmentOpen, setAssignmentOpen] = useState(false);
+  
   // Helper function for active link
   const isActive = (path: string) => router.pathname === path;
   const isParentActive = (prefix: string) => router.pathname.startsWith(prefix);
@@ -163,6 +166,73 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
                       }}
                     >
                       Show Professors
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            {/* Professors */}
+            {/* Students */}
+            <li className="nav-item mb-2">
+              <Link
+                href="/Students"
+                className={`nav-link text-white ${
+                  isActive("/Students") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <FontAwesomeIcon icon={faIdCard} className="me-2" />
+                Students
+              </Link>
+            </li>
+
+            {/* Assignments */}
+            <li className="nav-item mb-2">
+              <button
+                className={`nav-link text-white d-flex justify-content-between align-items-center w-100 ${
+                  isParentActive("/Assignments") ? styles.activeLink : ""
+                }`}
+                onClick={() => setAssignmentOpen(!assignmentOpen)}
+              >
+                <div className="d-flex align-items-center">
+                  <FontAwesomeIcon icon={faFileLines} className="me-2" />
+                  Assignments
+                </div>
+                
+                <FontAwesomeIcon icon={assignmentOpen ? faChevronDown : faChevronRight} className={`arrow ${assignmentOpen ? "rotate" : ""}`}/>
+              </button>
+
+              {/* Submenu */}
+              {assignmentOpen && (
+                <ul className="nav flex-column ms-4 mt-2">
+                  <li className="nav-item mb-2">
+                    <Link
+                      href="/Assignments/AddAssignments"
+                      className={`nav-link text-white ${
+                        isActive("/Assignments/AddAssignments") ? "active-link" : ""
+                      }`}
+                      onClick={() => {
+                        setAssignmentOpen(false); // close submenu
+                        closeSidebar(); // close mobile sidebar if needed
+                      }}
+                    >
+                      Add Assignments
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link
+                      href="/Assignments/ManageAssignments"
+                      className={`nav-link text-white ${
+                        isActive("/Assignments/ManageAssignments") ? "active-link" : ""
+                      }`}
+                      onClick={() => {
+                        setAssignmentOpen(false); // close submenu
+                        closeSidebar(); // close mobile sidebar if needed
+                      }}
+                    >
+                      Show Assignments
                     </Link>
                   </li>
                 </ul>
