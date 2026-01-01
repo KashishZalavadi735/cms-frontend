@@ -22,6 +22,7 @@ interface SidebarProps {
 function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
   const router = useRouter();
   const [adminOpen, setAdminOpen] = useState(false);
+  const [professorOpen, setProfessorOpen] = useState(false);
 
   // Helper function for active link
   const isActive = (path: string) => router.pathname === path;
@@ -84,9 +85,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
                 <ul className="nav flex-column ms-4 mt-2">
                   <li className="nav-item mb-2">
                     <Link
-                      href="/Admin/AddAdmin"
+                      href="/Admins/AddAdmin"
                       className={`nav-link text-white ${
-                        isActive("/Admin/AddAdmin") ? "active-link" : ""
+                        isActive("/Admins/AddAdmin") ? "active-link" : ""
                       }`}
                       onClick={() => {
                         setAdminOpen(false); // close submenu
@@ -99,9 +100,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
                   <li className="nav-item">
                     <Link
-                      href="/Admin/ShowAdmin"
+                      href="/Admins/ManageAdmin"
                       className={`nav-link text-white ${
-                        isActive("/Admin/AddAdmin") ? "active-link" : ""
+                        isActive("/Admins/ManageAdmin") ? "active-link" : ""
                       }`}
                       onClick={() => {
                         setAdminOpen(false); // close submenu
@@ -109,6 +110,59 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
                       }}
                     >
                       Show Admin
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            {/* Admin */}
+            {/* Professor */}
+            <li className="nav-item mb-2">
+              <button
+                className={`nav-link text-white d-flex justify-content-between align-items-center w-100 ${
+                  isParentActive("/Professor") ? styles.activeLink : ""
+                }`}
+                onClick={() => setProfessorOpen(!professorOpen)}
+              >
+                <div className="d-flex align-items-center">
+                  <FontAwesomeIcon icon={faCircleUser} className="me-2" />
+                  Professor
+                </div>
+                
+                <FontAwesomeIcon icon={professorOpen ? faChevronDown : faChevronRight} className={`arrow ${professorOpen ? "rotate" : ""}`}/>
+              </button>
+
+              {/* Submenu */}
+              {professorOpen && (
+                <ul className="nav flex-column ms-4 mt-2">
+                  <li className="nav-item mb-2">
+                    <Link
+                      href="/Professors/AddProfessor"
+                      className={`nav-link text-white ${
+                        isActive("/Professors/AddProfessor") ? "active-link" : ""
+                      }`}
+                      onClick={() => {
+                        setProfessorOpen(false); // close submenu
+                        closeSidebar(); // close mobile sidebar if needed
+                      }}
+                    >
+                      Add Professor
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link
+                      href="/Professors/ManageProfessors"
+                      className={`nav-link text-white ${
+                        isActive("/Professors/ManageProfessors") ? "active-link" : ""
+                      }`}
+                      onClick={() => {
+                        setProfessorOpen(false); // close submenu
+                        closeSidebar(); // close mobile sidebar if needed
+                      }}
+                    >
+                      Show Professors
                     </Link>
                   </li>
                 </ul>

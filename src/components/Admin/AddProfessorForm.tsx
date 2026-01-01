@@ -3,15 +3,15 @@
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
-function AddAdminForm() {
+function AddProfessorForm() {
   const router = useRouter();
 
   const handleCancel = () => {
-    router.push("/Dashboard"); // Navigate back to admin list
+    router.push("/Dashboard");
   };
 
   const handleSubmit = () => {
-    toast.success("Admin added successfully!");
+    toast.success("Professor added successfully!");
     router.push("/Dashboard");
   };
 
@@ -50,11 +50,26 @@ function AddAdminForm() {
                 </select>
               </div>
             </div>
+
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <label className="form-label">Subject </label>
+                <select className="form-select">
+                  <option value="">Computer</option>
+                  <option value="">Mechanical</option>
+                  <option value="">Electrical</option>
+                  <option value="">Civil</option>
+                  <option value="">Chemical</option>
+                </select>
+              </div>
+            </div>
+
+
           </div>
 
           <div className="d-flex justify-content-center gap-2">
             <button type="submit" className="btn btn-custom">
-              Add Admin
+              Add Professor
             </button>
             <button
               type="button"
@@ -67,7 +82,7 @@ function AddAdminForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default AddAdminForm;
+export default AddProfessorForm
