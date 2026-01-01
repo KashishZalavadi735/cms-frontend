@@ -3,7 +3,7 @@
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
-function AddAdminForm() {
+function UpdateAdminForm() {
   const router = useRouter();
 
   const handleCancel = () => {
@@ -11,7 +11,7 @@ function AddAdminForm() {
   };
 
   const handleSubmit = () => {
-    toast.success("Admin added successfully!");
+    toast.success("Admin updated successfully!");
     router.push("/Dashboard");
   };
 
@@ -54,7 +54,7 @@ function AddAdminForm() {
 
           <div className="d-flex justify-content-center gap-2">
             <button type="submit" className="btn btn-custom">
-              Add Admin
+              Update Admin
             </button>
             <button
               type="button"
@@ -70,4 +70,4 @@ function AddAdminForm() {
   );
 }
 
-export default AddAdminForm;
+export default UpdateAdminForm;

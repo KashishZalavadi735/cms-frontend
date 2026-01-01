@@ -1,3 +1,4 @@
+"use client";
 import Sidebar from "@/components/Layout/Sidebar";
 import Header from "@/components/Layout/Header";
 import React, { Children, useState } from "react";

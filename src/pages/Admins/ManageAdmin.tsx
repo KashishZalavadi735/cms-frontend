@@ -1,16 +1,9 @@
 "use client";
 
 import AdminList from "@/components/SuperAdmin/AdminList";
-import { useRouter } from "next/router";
 
+function ManageAdmin() {
 
-function ShowAdmin() {
-  const router = useRouter();
-
-  // Handle add admin
-  const handleAddAdmin = () => {
-    router.push("/Admin/AddAdmin")
-  };
   return (
     <div className="mt-3">
       <div className="d-flex justify-content-between align-items-center">
@@ -25,4 +18,4 @@ function ShowAdmin() {
   );
 }
 
-export default ShowAdmin;
+export default ManageAdmin;
