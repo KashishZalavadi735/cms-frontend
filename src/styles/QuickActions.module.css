@@ -1,0 +1,68 @@
+.cardAnimation {
+    transition: all 0.3s ease;
+}
+
+.cardAnimation:hover {
+    transform: translateY(-8px);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+    font-size: 20px;
+}
+
+.blueBg {
+    background: #e0ecff;
+    color: #2563eb;
+}
+
+.blueBtn {
+    background: rgba(37, 99, 235, 0.10);
+}
+
+.blueBtn:hover {
+    background: rgba(37, 99, 235, 0.25);
+}
+
+.cardBlue:hover {
+    border: 1.5px solid #2563eb;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.18);
+}
+
+.greenBg {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.greenBtn {
+    background: rgba(22, 163, 74, 0.10);
+}
+
+.greenBtn:hover {
+    background: rgba(22, 163, 74, 0.25);
+}
+
+.cardGreen:hover {
+    border: 1.5px solid #16a34a;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.18);
+}
+
+.purpleBg {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+.purpleBtn {
+    background: rgba(124, 58, 237, 0.10);
+}
+
+.purpleBtn:hover {
+    background: rgba(124, 58, 237, 0.25);
+}
+
+.cardPurple:hover {
+    border: 1.5px solid #7c3aed;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.18);
+}

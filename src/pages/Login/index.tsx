@@ -1,54 +1,70 @@
 "use client";
-
-import Link from "next/link";
+import styles from "@/styles/login.module.css";
 
 function Login() {
   return (
-    <div className="d-flex justify-content-center align-self-center align-items-center vw-100 vh-100">
-      <div className="card shadow p-5" style={{ width: "500px" }}>
-        <h3 className="text-primary text-center">
-          <b>CMS</b>
+    <div
+      className={`d-flex align-items-center justify-content-center vh-100 ${styles.bgPage}`}
+    >
+      <div className={`card shadow-lg py-5 px-4 rounded-4 ${styles.loginCard}`}>
+        {/* Icon */}
+        <div className="text-center mb-3">
+          <div
+            className={`rounded-circle d-inline-flex align-items-center justify-content-center ${styles.icon}`}
+          >
+            <i className="fas fa-university"></i>
+          </div>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-center fw-bold mb-1">
+          College Management <br /> System
         </h3>
-        <h4 className="text-center">
-          <b>College Management System</b>
-        </h4>
-        <h6 className="text-muted text-center">Sign in to your account</h6>
+        <p className="text-center text-muted mb-4">Sign in to your account</p>
+
+        {/* Form */}
         <form>
-          {/* Email */}
-          <div className="mt-3">
-            <label className="form-label">Email Address</label>
+          <div className={styles.inputGroup}>
             <input
               type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter your Email"
+              placeholder="Email address"
+              className={`${styles.input} ${styles.inputTop}`}
             />
-          </div>
 
-          {/* Password */}
-          <div className="mt-3">
-            <label className="form-label">Password</label>
             <input
               type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter your Password here"
+              placeholder="Password"
+              className={`${styles.input} ${styles.inputBottom}`}
             />
           </div>
 
-          <div className="mt-3 text-end">
-            <Link href="" className="text-primary text-decoration-none">
-              Forgot Password?
-            </Link>
+          <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <div className="form-check">
+              <input type="checkbox" className="form-check-input" />
+              <label className="form-check-label">Remember me</label>
+            </div>
+
+            <a href="#" className="text-primary text-decoration-none">
+              Forgot your password?
+            </a>
           </div>
 
-          <button type="submit" className="btn btn-primary w-100 mt-3">
-            Sign In
+          <button type="submit" className={styles.loginBtn}>
+            <i className="fas fa-right-to-bracket me-2"></i>
+            Sign in
           </button>
         </form>
+
+        <p className="text-center mt-3 mb-0">
+          Don't have an account? {" "}
+          <a href="/Signup" className="fw-semibold text-primary text-decoration-none">
+            Sign up as Student
+          </a>
+        </p>
       </div>
     </div>
   );
 }
 
+Login.noLayout = true;
 export default Login;

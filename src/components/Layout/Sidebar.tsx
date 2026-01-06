@@ -1,20 +1,8 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faChevronRight,
-  faCircleUser,
-  faFileLines,
-  faGauge,
-  faIdCard,
-  faRightFromBracket,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import styles from "../../styles/Sidebar.module.css";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -22,235 +10,227 @@ interface SidebarProps {
 }
 
 function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
-  const router = useRouter();
-  const [adminOpen, setAdminOpen] = useState(false);
-  const [professorOpen, setProfessorOpen] = useState(false);
-  const [assignmentOpen, setAssignmentOpen] = useState(false);
-  
+  const pathname = usePathname();
+
   // Helper function for active link
-  const isActive = (path: string) => router.pathname === path;
-  const isParentActive = (prefix: string) => router.pathname.startsWith(prefix);
+  const isActive = (path: string) => pathname === path;
 
   return (
     <div
-      className={`${styles.sidebar} ${isSidebarOpen ? styles.mobileOpen : ""}`}
+      className={`d-flex flex-column justify-content-between text-white ${styles.sidebar} ${isSidebarOpen ? styles.mobileOpen : ""}`}
+      style={{height: "100%"}}
     >
-      <div
-        className="d-flex flex-column justify-content-between py-3"
-        style={{ height: "100%" }}
-      >
+      
         {/* User Info */}
-        <div className="d-flex align-items-center gap-3 ps-3 admin mb-3 mt-3">
-          <FontAwesomeIcon icon={faUser} />
+        <div className="mx-4 mt-3">
+          {/* Logo */}
           <div>
-            <div className="fw-bold">User</div>
-            <div className="small">email</div>
+            <div className="d-flex align-items-center ">
+              <div>
+                <i className={`fas fa-university me-2 ${styles.icon}`}></i>
+              </div>
+              <div>
+                <h4 className="fw-bold mb-0">CollegeMS</h4>
+              </div>
+            </div>
+            <small className={`${styles.subTitle}`}>Management System</small>
           </div>
         </div>
 
         <hr style={{ borderColor: "rgba(255, 255, 255, 0.5)" }} />
 
-        <nav className="flex-grow-1">
-          <ul className="nav flex-column">
-            {/* Dashboard */}
-            <li className="nav-item mb-2">
+        <div className="mx-4">
+          <div
+            className={`d-flex align-items-center py-2 px-3 mt-3 ${styles.adminCard}`}
+          >
+            <div>
+              <i
+                className={`fas fa-user-graduate fs-5 me-3 ${styles.icon}`}
+              ></i>
+            </div>
+            <div>
+              <div className="fw-semibold">SuperAdmin</div>
+              <small>admin@college.edu</small>
+            </div>
+          </div>
+        </div>
+
+        {/* Menu */}
+        <nav className="flex-grow-1 mt-3">
+          <ul className="nav flex-column mx-1">
+            <li className="nav-item mb-3">
               <Link
                 href="/Dashboard"
-                className={`nav-link text-white ${
+                className={`nav-link text-white  ${styles.navLink} ${
                   isActive("/Dashboard") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
-                <FontAwesomeIcon icon={faGauge} className="me-2" />
+                <i className="fas fa-gauge-high me-2"></i>
                 Dashboard
               </Link>
             </li>
 
-            {/* Super Admin */}
-            {/* Admin */}
-            <li className="nav-item mb-2">
-              <button
-                className={`nav-link text-white d-flex justify-content-between align-items-center w-100 ${
-                  isParentActive("/Admin") ? styles.activeLink : ""
-                }`}
-                onClick={() => setAdminOpen(!adminOpen)}
-              >
-                <div className="d-flex align-items-center">
-                  <FontAwesomeIcon icon={faCircleUser} className="me-2" />
-                  Admin (HOD)
-                </div>
-                
-                <FontAwesomeIcon icon={adminOpen ? faChevronDown : faChevronRight} className={`arrow ${adminOpen ? "rotate" : ""}`}/>
-              </button>
+            {/* Administration */}
+            <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+              Administration
+            </div>
 
-              {/* Submenu */}
-              {adminOpen && (
-                <ul className="nav flex-column ms-4 mt-2">
-                  <li className="nav-item mb-2">
-                    <Link
-                      href="/Admins/AddAdmin"
-                      className={`nav-link text-white ${
-                        isActive("/Admins/AddAdmin") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setAdminOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Add Admin
-                    </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link
-                      href="/Admins/ManageAdmin"
-                      className={`nav-link text-white ${
-                        isActive("/Admins/ManageAdmin") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setAdminOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Show Admin
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            {/* Admin */}
-            {/* Professor */}
-            <li className="nav-item mb-2">
-              <button
-                className={`nav-link text-white d-flex justify-content-between align-items-center w-100 ${
-                  isParentActive("/Professor") ? styles.activeLink : ""
-                }`}
-                onClick={() => setProfessorOpen(!professorOpen)}
-              >
-                <div className="d-flex align-items-center">
-                  <FontAwesomeIcon icon={faCircleUser} className="me-2" />
-                  Professor
-                </div>
-                
-                <FontAwesomeIcon icon={professorOpen ? faChevronDown : faChevronRight} className={`arrow ${professorOpen ? "rotate" : ""}`}/>
-              </button>
-
-              {/* Submenu */}
-              {professorOpen && (
-                <ul className="nav flex-column ms-4 mt-2">
-                  <li className="nav-item mb-2">
-                    <Link
-                      href="/Professors/AddProfessor"
-                      className={`nav-link text-white ${
-                        isActive("/Professors/AddProfessor") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setProfessorOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Add Professor
-                    </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link
-                      href="/Professors/ManageProfessors"
-                      className={`nav-link text-white ${
-                        isActive("/Professors/ManageProfessors") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setProfessorOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Show Professors
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            {/* Professors */}
-            {/* Students */}
-            <li className="nav-item mb-2">
+            <li className="nav-item ">
               <Link
-                href="/Students"
-                className={`nav-link text-white ${
-                  isActive("/Students") ? styles.activeLink : ""
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
-                <FontAwesomeIcon icon={faIdCard} className="me-2" />
-                Students
+                <i className="fas fa-user-plus me-2"></i>
+                Create Admin
               </Link>
             </li>
 
-            {/* Assignments */}
-            <li className="nav-item mb-2">
-              <button
-                className={`nav-link text-white d-flex justify-content-between align-items-center w-100 ${
-                  isParentActive("/Assignments") ? styles.activeLink : ""
+            <li className="nav-item mb-3">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/") ? styles.activeLink : ""
                 }`}
-                onClick={() => setAssignmentOpen(!assignmentOpen)}
+                onClick={closeSidebar}
               >
-                <div className="d-flex align-items-center">
-                  <FontAwesomeIcon icon={faFileLines} className="me-2" />
-                  Assignments
-                </div>
-                
-                <FontAwesomeIcon icon={assignmentOpen ? faChevronDown : faChevronRight} className={`arrow ${assignmentOpen ? "rotate" : ""}`}/>
-              </button>
+                <i className="fa fa-users-cog me-2"></i>
+                Manage Users
+              </Link>
+            </li>
 
-              {/* Submenu */}
-              {assignmentOpen && (
-                <ul className="nav flex-column ms-4 mt-2">
-                  <li className="nav-item mb-2">
-                    <Link
-                      href="/Assignments/AddAssignments"
-                      className={`nav-link text-white ${
-                        isActive("/Assignments/AddAssignments") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setAssignmentOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Add Assignments
-                    </Link>
-                  </li>
+            {/* Department */}
 
-                  <li className="nav-item">
-                    <Link
-                      href="/Assignments/ManageAssignments"
-                      className={`nav-link text-white ${
-                        isActive("/Assignments/ManageAssignments") ? "active-link" : ""
-                      }`}
-                      onClick={() => {
-                        setAssignmentOpen(false); // close submenu
-                        closeSidebar(); // close mobile sidebar if needed
-                      }}
-                    >
-                      Show Assignments
-                    </Link>
-                  </li>
-                </ul>
-              )}
+            {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+              Department
+            </div>
+
+            <li className="nav-item">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fas fa-chalkboard-teacher me-2"></i>
+                Add Professor
+              </Link>
+            </li>
+
+            <li className="nav-item mb-3">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fa fa-user-graduate me-2"></i>
+                Branch Students
+              </Link>
+            </li> */}
+
+            {/* Teaching */}
+
+            {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+              Teaching
+            </div>
+
+            <li className="nav-item">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fas fa-tasks me-2"></i>
+                Assign Assignment
+              </Link>
+            </li>
+
+            <li className="nav-item mb-3">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fa fa-users me-2"></i>
+                View Students
+              </Link>
+            </li> */}
+
+            {/* Learning */}
+
+            {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+              Learning
+            </div>
+
+            <li className="nav-item">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fas fa-book-open me-2"></i>
+                My Assignments
+              </Link>
+            </li>
+
+            <li className="nav-item mb-3">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/Dashboard") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fas fa-clipboard-check me-2"></i>
+                Assignment Status
+              </Link>
+            </li> */}
+
+            <hr className="m-0" style={{ borderColor: "rgba(255, 255, 255, 0.25)" }} />
+
+            <li className="nav-item mt-3">
+              <Link
+                href="/"
+                className={`nav-link text-white ${styles.navLink} ${
+                  isActive("/") ? styles.activeLink : ""
+                }`}
+                onClick={closeSidebar}
+              >
+                <i className="fa fa-user-circle me-2"></i>
+                Profile
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link href="" className={`nav-link text-white ${styles.navLink}`}>
+                <i className="fas fa-right-from-bracket me-2"></i>
+                Logout
+              </Link>
             </li>
           </ul>
         </nav>
 
-        <hr style={{ borderColor: "rgba(255, 255, 255, 0.5)" }} />
+        <hr
+          className="m-0"
+          style={{ borderColor: "rgba(255, 255, 255, 0.5)" }}
+        />
 
-        {/* Logout */}
-        <div className="mb-2 ps-3">
-          <button className="nav-link text-white bg-transparent border-0">
-            <FontAwesomeIcon icon={faRightFromBracket} className="me-2" />
-            Logout
-          </button>
+        {/* Footer */}
+        <div className={`text-center py-3 ${styles.footer}`}>
+          College Management System v2.0 <br />© 2023 All rights reserved
         </div>
-      </div>
     </div>
   );
 }
