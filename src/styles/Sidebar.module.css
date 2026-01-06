@@ -1,43 +1,27 @@
 .sidebar {
-  width: 300px;
-  background: linear-gradient(135deg, #2F3C7E, #4B5FCF);
-  color: white;
+  width: 280px;
   height: 100vh;
+  background: linear-gradient(180deg, #1e3a8a, #1e40af);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   transition: transform 0.3s ease;
 }
 
-.mobileOpen {
-  transform: translateX(0);
-}
-
-/* arrow */
-.arrow {
-  transition: transform 0.3s ease;
-}
-
-.rotate {
-  transform: rotate(180deg);
-}
-
-
-/* Desktop */
-@media screen and (min-width: 769px) {
-  .sidebar{
-    transform: translateX(0);
-    position: static;
-  }
-}
-
-@media screen and (max-width: 768px) {
+/* Mobile */
+@media (max-width: 768px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     transform: translateX(-100%);
-    z-index: 9999;
-    width: 250px;
   }
-  .sidebar.mobile-open{
+  .mobileOpen {
+    transform: translateX(0);
+  }
+}
+
+/* Desktop always visible */
+@media screen and (min-width: 769px) {
+  .sidebar {
     transform: translateX(0);
   }
 }
@@ -47,3 +31,39 @@
   background-color: transparent;
   padding-left: 0.75rem; /* adjust for border */
 }
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subTitle {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.adminCard {
+  background: linear-gradient(180deg, #2563eb, #1d4ed8);
+  border-radius: 12px;
+}
+
+.navLink {
+  font-size: 0.95rem;
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  color: #bfdbfe;
+  letter-spacing: 1px;
+}
+
+.footer {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+

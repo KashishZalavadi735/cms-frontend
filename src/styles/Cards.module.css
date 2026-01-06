@@ -1,0 +1,33 @@
+.cardAnimation {
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardAnimation:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.green {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.purple {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+}
+
+.orange {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.iconCircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 20px;
+}

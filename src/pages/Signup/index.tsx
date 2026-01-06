@@ -1,112 +1,89 @@
 "use client";
 
+import styles from "@/styles/signup.module.css";
+
 function Signup() {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 vw-100">
-      <div className="card shadow p-5" style={{ width: "600px" }}>
-        <h3 className="text-primary text-center">
-          <b>CMS</b>
-        </h3>
-        <h4 className="text-center">
-          <b>College Management System</b>
-        </h4>
-        <h6 className="text-muted text-center">Sign up to your account</h6>
+    <div
+      className={`d-flex align-items-center justify-content-center vh-100 ${styles.bgPage}`}
+    >
+      <div className={`card shadow-lg py-5 px-4 rounded-4 ${styles.signupCard}`}>
+        {/* Icon */}
+        <div className="text-center mb-3">
+          <div
+            className={`rounded-circle d-inline-flex align-items-center justify-content-center ${styles.icon}`}
+          >
+            <i className="fas fa-user-graduate"></i>
+          </div>
+        </div>
 
+        {/* Title */}
+        <h3 className="text-center fw-bold mb-1">Student Registration</h3>
+        <p className="text-center text-muted mb-4">
+          Create your student account
+        </p>
+
+        {/* Form */}
         <form>
-          {/* Name */}
-          <div className="mt-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
+          <div className={styles.inputGroup}>
             <input
               type="text"
-              className="form-control"
-              id="name"
-              placeholder="Enter your Name here"
+              placeholder="Full Name"
+              className={`${styles.input} ${styles.inputTop}`}
             />
-          </div>
-
-          {/* Email */}
-          <div className="mt-3">
-            <label htmlFor="email" className="form-label">
-              Email Address
-            </label>
             <input
               type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter your Email"
+              placeholder="Email address"
+              className={styles.input}
             />
-          </div>
-
-          {/* Password */}
-          <div className="mt-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
             <input
               type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter your Password"
+              placeholder="Password"
+              className={styles.input}
             />
-          </div>
 
-          {/* Branch */}
-          <div className="mt-3">
-            <label htmlFor="branch" className="form-label">
-              Branch
-            </label>
-            <select className="form-select" id="branch">
+            <select className={styles.input}>
               <option value="">Select Branch</option>
-              <option value="Computer">Computer</option>
-              <option value="Mechanical">Mechanical</option>
-              <option value="Electrical">Electrical</option>
-              <option value="Civil">Civil</option>
-              <option value="Chemical">Chemical</option>
+              <option value="CS">Computer Science</option>
+              <option value="IT">Information Technology</option>
+              <option value="EC">Electronics</option>
+              <option value="ME">Mechanical</option>
             </select>
-          </div>
 
-          {/* Semester */}
-          <div className="mt-3">
-            <label htmlFor="semester" className="form-label">
-              Semester
-            </label>
-            <select className="form-select" id="semester">
+            <select className={styles.input}>
               <option value="">Select Semester</option>
-              <option value="1">Sem 1</option>
-              <option value="2">Sem 2</option>
-              <option value="3">Sem 3</option>
-              <option value="4">Sem 4</option>
-              <option value="5">Sem 5</option>
-              <option value="6">Sem 6</option>
-              <option value="7">Sem 7</option>
-              <option value="8">Sem 8</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
             </select>
-          </div>
 
-          {/* Year */}
-          <div className="mt-4">
-            <label htmlFor="year" className="form-label">
-              Year
-            </label>
-            <select className="form-select" id="year">
+            <select className={`${styles.input} ${styles.inputBottom}`}>
               <option value="">Select Year</option>
-              <option value="1">First Year</option>
-              <option value="2">Second Year</option>
-              <option value="3">Third Year</option>
-              <option value="4">Fourth Year</option>
+              <option value="FY">FY</option>
+              <option value="SY">SY</option>
+              <option value="TY">TY</option>
             </select>
           </div>
 
-          {/* Submit */}
-          <button type="submit" className="btn btn-primary w-100 mt-4">
+          <button type="submit" className={`${styles.signupBtn} mt-4`}>
+            <i className="fas fa-user-plus me-2"></i>
             Sign Up
           </button>
         </form>
+
+        <p className="text-center mt-3 mb-0">
+          Already have an account?{" "}
+          <a href="/Login" className="fw-semibold text-primary text-decoration-none">
+            Sign in
+          </a>
+        </p>
       </div>
     </div>
   );
 }
 
+Signup.noLayout = true;
 export default Signup;

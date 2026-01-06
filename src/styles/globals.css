@@ -19,7 +19,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,38 +39,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
-
-/* Custom button */
-.btn-custom {
-  background: linear-gradient(135deg, #2F3C7E, #4B5FCF);
-  color: #fff;
-  border: none;
-}
-
-.btn-custom:hover {
-  background: linear-gradient(135deg, #25306a, #3f52b5);
-}
-
-/* Outline Button */
-.btn.btn-outline-custom {
-  border: 1px solid #2F3C7E;
-  color: #2F3C7E;
-}
-
-.btn.btn-outline-custom:hover {
-  background-color: #2F3C7E;
-  color: #fff;
-}
-
-/* Dashboard icon */
-
-.dashboard-icon{
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
 }

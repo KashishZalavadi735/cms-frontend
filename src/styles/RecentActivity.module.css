@@ -1,0 +1,48 @@
+.item {
+    align-items: flex-start;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.item:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.itemIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.greenIcon {
+    background: rgba(22, 163, 74, 0.15);
+    color: rgba(22, 163, 74, 1);
+}
+
+.badgeGreen {
+    background: rgba(22, 163, 74, 0.15);
+    border-radius: 999px;
+}
+
+.purpleIcon {
+    background: rgba(124, 58, 237, 0.15);
+    color: rgba(124, 58, 237, 1);
+}
+
+.badgePurple {
+    background: rgba(124, 58, 237, 0.15);
+    border-radius: 999px;
+    color: rgba(124, 58, 237, 1);
+}
+
+.orangeIcon {
+    background: rgba(249, 115, 22, 0.15);
+    color: rgba(249, 115, 22, 1);
+}
+
+.badgeOrange {
+    background: rgba(249, 115, 22, 0.15);
+    color: rgba(249, 115, 22, 1);
+    border-radius: 999px;
+}

@@ -1,17 +1,28 @@
-import "@/styles/globals.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { AppProps } from "next/app";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import Layout from "@/components/Layout/Layout";
+
+// Your global styles
+import "@/styles/globals.css";
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Font Awesome CSS
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+// Import toaster
 import { Toaster } from "react-hot-toast";
+import Layout from "@/components/Layout/Layout";
+import { NextPage } from "next";
 
-config.autoAddCss = false;
+export type NextPageWithLayout = NextPage & {
+  noLayout?: boolean;
+};
 
-export default function App({ Component, pageProps }: AppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   // Page without Layout
-  if (Component.name === "Login" || Component.name === "SignUp") {
+  if (Component.noLayout) {
     return (
       <>
         <Component {...pageProps} />
