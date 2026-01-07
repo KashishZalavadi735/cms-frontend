@@ -78,9 +78,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item ">
               <Link
-                href="/"
+                href="/Admin/CreateAdmin"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/") ? styles.activeLink : ""
+                  isActive("/Admin/CreateAdmin") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
@@ -91,14 +91,14 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item mb-3">
               <Link
-                href="/"
+                href="/Admin/ManageAdmin"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/") ? styles.activeLink : ""
+                  isActive("/Admin/ManageAdmin") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
                 <i className="fa fa-users-cog me-2"></i>
-                Manage Users
+                Manage Admins
               </Link>
             </li>
 

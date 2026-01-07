@@ -8,7 +8,7 @@ function QuickActions() {
       {/* Create Admin */}
       <div className="col-12 col-md-6 col-lg-4">
         <div
-          className={`card shadow-lg border-1 rounded-3 p-3 ${Styles.cardAnimation} ${Styles.cardBlue}`}
+          className={`card shadow-lg border-1 rounded-3 p-3 cardAnimation ${Styles.cardBlue}`}
         >
           <div className="d-flex align-items-start gap-3">
             <div
@@ -32,7 +32,7 @@ function QuickActions() {
       {/* Assign Assignment */}
       <div className="col-12 col-md-6 col-lg-4">
         <div
-          className={`card shadow-lg border-1 rounded-3 p-3 ${Styles.cardAnimation} ${Styles.cardGreen}`}
+          className={`card shadow-lg border-1 rounded-3 p-3 cardAnimation ${Styles.cardGreen}`}
         >
           <div className="d-flex align-items-start gap-3">
             <div
@@ -56,7 +56,7 @@ function QuickActions() {
       {/* View Analytics */}
       <div className="col-12 col-md-6 col-lg-4">
         <div
-          className={`card shadow-lg border-1 rounded-3 p-3 ${Styles.cardAnimation} ${Styles.cardPurple}`}
+          className={`card shadow-lg border-1 rounded-3 p-3 cardAnimation ${Styles.cardPurple}`}
         >
           <div className="d-flex align-items-start gap-3">
             <div
