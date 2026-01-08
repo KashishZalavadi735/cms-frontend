@@ -71,6 +71,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               </Link>
             </li>
 
+                {/* Super Admin menus */}
             {/* Administration */}
             <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
               Administration
@@ -78,9 +79,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item ">
               <Link
-                href="/Admin/CreateAdmin"
+                href="/SuperAdmin/CreateAdmin"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Admin/CreateAdmin") ? styles.activeLink : ""
+                  isActive("/SuperAdmin/CreateAdmin") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
@@ -91,9 +92,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item mb-3">
               <Link
-                href="/Admin/ManageAdmin"
+                href="/SuperAdmin/ManageAdmin"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Admin/ManageAdmin") ? styles.activeLink : ""
+                  isActive("/SuperAdmin/ManageAdmin") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
@@ -102,17 +103,18 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               </Link>
             </li>
 
+                {/* Admin menus */}
             {/* Department */}
 
-            {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+            <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
               Department
             </div>
 
             <li className="nav-item">
               <Link
-                href="/"
+                href="/Admin/AddProfessor"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
+                  isActive("/Admin/AddProfessor") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
@@ -123,28 +125,28 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item mb-3">
               <Link
-                href="/"
+                href="/Admin/ManageProfessor"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
+                  isActive("/Admin/ManageProfessor") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
-                <i className="fa fa-user-graduate me-2"></i>
-                Branch Students
+                <i className="fas fa-users-cog me-2"></i>
+                Manage Professor
               </Link>
-            </li> */}
+            </li>
 
             {/* Teaching */}
 
-            {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
+            <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
               Teaching
             </div>
 
             <li className="nav-item">
               <Link
-                href="/"
+                href="/Admin/AssignAssignments"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
+                  isActive("/Admin/AssignAssignments") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
@@ -155,17 +157,18 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
             <li className="nav-item mb-3">
               <Link
-                href="/"
+                href="/Admin/BranchStudents"
                 className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
+                  isActive("/Admin/BranchStudents") ? styles.activeLink : ""
                 }`}
                 onClick={closeSidebar}
               >
                 <i className="fa fa-users me-2"></i>
                 View Students
               </Link>
-            </li> */}
+            </li>
 
+                {/* Student Menus */}
             {/* Learning */}
 
             {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>

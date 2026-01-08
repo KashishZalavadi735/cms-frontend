@@ -2,15 +2,16 @@
 
 import { useRouter } from "next/router";
 
-function AdminList() {
+
+function ProfessorList() {
   const router = useRouter();
 
   const handleView = () => {
-    router.push(`/SuperAdmin/ViewAdmin`);
+    router.push(`/Admin/ViewProfessor`);
   };
 
   const handleEdit = () => {
-    router.push(`/SuperAdmin/UpdateAdmin`);
+    router.push(`/Admin/UpdateProfessor`);
   };
 
   return (
@@ -19,7 +20,7 @@ function AdminList() {
         <table className="table align-middle">
           <thead>
             <tr>
-              <th>ADMIN_ID</th>
+              <th>PROFESSOR_ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
               <th>CONTACT NO</th>
@@ -29,9 +30,9 @@ function AdminList() {
           </thead>
           <tbody>
             <tr>
-              <td>HOD_101</td>
-              <td>Hirav Patel</td>
-              <td>hiravpatel123@gmail.com</td>
+              <td>PROF_101</td>
+              <td>Riddhi Pawar</td>
+              <td>rspawar123@gmail.com</td>
               <td>9752136842</td>
               <td>Computer Engineering</td>
               <td style={{ cursor: "pointer" }}>
@@ -55,4 +56,4 @@ function AdminList() {
   );
 }
 
-export default AdminList;
+export default ProfessorList;
