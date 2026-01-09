@@ -23,7 +23,10 @@ function RecentAssignments() {
         </div>
 
         {/* Assignment 2 */}
-        <div className="border border-success rounded-4 p-3 mb-3 position-relative" style={{ borderLeft: "5px solid #16a34a !important" }}>
+        <div
+          className="border border-success rounded-4 p-3 mb-3 position-relative"
+          style={{ borderLeft: "5px solid #16a34a !important" }}
+        >
           <h6 className="fw-semibold mb-1">OS Scheduling Algorithms</h6>
           <p className="text-muted small mb-2">Computer Engg – Sem 5</p>
 
@@ -36,7 +39,10 @@ function RecentAssignments() {
         </div>
 
         {/* Assignment 3 */}
-        <div className="border border-warning rounded-4 p-3 position-relative" style={{ borderLeft: "5px solid #f97316 !important" }}>
+        <div
+          className="border border-warning rounded-4 p-3 position-relative"
+          style={{ borderLeft: "5px solid #f97316 !important" }}
+        >
           <h6 className="fw-semibold mb-1">Network Protocols</h6>
           <p className="text-muted small mb-2">Computer Engg – Sem 6</p>
 
