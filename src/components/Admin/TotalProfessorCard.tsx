@@ -4,7 +4,7 @@ function TotalProfessorCard() {
   return (
     <div className="card border-0 rounded-4 text-white cardAnimation" style={{ background: "linear-gradient(135deg, #22c55e, #16a34a)" }}>
         <div className="card-body p-4">
-            <h6>Professors Summary</h6>
+            <h5>Professors Summary</h5>
             <h1 className="fw-bold">24</h1>
             <p className="mb-3">
                 In Computer Department

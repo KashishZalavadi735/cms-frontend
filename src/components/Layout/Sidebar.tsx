@@ -72,7 +72,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
           {/* Super Admin menus */}
           {/* Administration */}
-          <div
+          {/* <div
             className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}
           >
             Administration
@@ -102,7 +102,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               <i className="fa fa-users-cog me-2"></i>
               Manage Admins
             </Link>
-          </li>
+          </li> */}
 
           {/* Admin menus */}
           {/* Department */}
@@ -174,7 +174,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
           </li> */}
 
           {/* Professor Menu */}
-          <div
+          {/* <div
             className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}
           >
             Teaching
@@ -204,40 +204,42 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               <i className="fa fa-users me-2"></i>
               View Students
             </Link>
-          </li>
+          </li> */}
 
           {/* Student Menus */}
           {/* Learning */}
 
-          {/* <div className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}>
-              Learning
-            </div>
+          <div
+            className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}
+          >
+            Learning
+          </div>
 
-            <li className="nav-item">
-              <Link
-                href="/"
-                className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
-                }`}
-                onClick={closeSidebar}
-              >
-                <i className="fas fa-book-open me-2"></i>
-                My Assignments
-              </Link>
-            </li>
+          <li className="nav-item">
+            <Link
+              href="/Student/MyAssignment"
+              className={`nav-link text-white ${styles.navLink} ${
+                isActive("/Student/MyAssignment") ? styles.activeLink : ""
+              }`}
+              onClick={closeSidebar}
+            >
+              <i className="fas fa-book-open me-2"></i>
+              My Assignments
+            </Link>
+          </li>
 
-            <li className="nav-item mb-3">
-              <Link
-                href="/"
-                className={`nav-link text-white ${styles.navLink} ${
-                  isActive("/Dashboard") ? styles.activeLink : ""
-                }`}
-                onClick={closeSidebar}
-              >
-                <i className="fas fa-clipboard-check me-2"></i>
-                Assignment Status
-              </Link>
-            </li> */}
+          <li className="nav-item mb-3">
+            <Link
+              href="/Student/AssignmentStatus"
+              className={`nav-link text-white ${styles.navLink} ${
+                isActive("/Student/AssignmentStatus") ? styles.activeLink : ""
+              }`}
+              onClick={closeSidebar}
+            >
+              <i className="fas fa-clipboard-check me-2"></i>
+              Assignment Status
+            </Link>
+          </li>
 
           <hr
             className="m-0"
