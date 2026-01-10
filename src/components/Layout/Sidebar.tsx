@@ -72,7 +72,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
           {/* Super Admin menus */}
           {/* Administration */}
-          {/* <div
+          <div
             className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}
           >
             Administration
@@ -102,7 +102,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               <i className="fa fa-users-cog me-2"></i>
               Manage Admins
             </Link>
-          </li> */}
+          </li>
 
           {/* Admin menus */}
           {/* Department */}
@@ -209,7 +209,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
           {/* Student Menus */}
           {/* Learning */}
 
-          <div
+          {/* <div
             className={`px-4 py-1 text-uppercase fw-bold small ${styles.sectionTitle}`}
           >
             Learning
@@ -239,7 +239,7 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
               <i className="fas fa-clipboard-check me-2"></i>
               Assignment Status
             </Link>
-          </li>
+          </li> */}
 
           <hr
             className="m-0"
@@ -248,9 +248,9 @@ function Sidebar({ isSidebarOpen, closeSidebar }: SidebarProps) {
 
           <li className="nav-item mt-3">
             <Link
-              href="/"
+              href="/Profile"
               className={`nav-link text-white ${styles.navLink} ${
-                isActive("/") ? styles.activeLink : ""
+                isActive("/Profile") ? styles.activeLink : ""
               }`}
               onClick={closeSidebar}
             >
