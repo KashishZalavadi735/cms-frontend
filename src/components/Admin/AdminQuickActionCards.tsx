@@ -3,8 +3,9 @@
 import Styles from "@/styles/QuickActions.module.css";
 import { useRouter } from "next/router";
 
-function QuickActions() {
-  const router = useRouter();
+function AdminQuickActionCards() {
+    const router = useRouter();
+    
   return (
     <div className="row g-3">
       {/* Create Admin */}
@@ -19,13 +20,13 @@ function QuickActions() {
               <i className="fas fa-user-plus"></i>
             </div>
             <div>
-              <h5 className="fw-bold mb-1">Create Admin</h5>
+              <h5 className="fw-bold mb-1">Create Professor</h5>
               <p className="text-muted mb-3">Add new HOD to department</p>
             </div>
           </div>
           <div>
-            <button className={`btn text-primary w-100 fw-medium ${Styles.blueBtn}`} onClick={() => router.push("/SuperAdmin/CreateAdmin")}>
-              Go to Create Admin
+            <button className={`btn text-primary w-100 fw-medium ${Styles.blueBtn}`} onClick={() => router.push("/Admin/AddProfessor")}>
+              Go to Create Professor
             </button>
           </div>
         </div>
@@ -48,7 +49,7 @@ function QuickActions() {
             </div>
           </div>
           <div>
-            <button className={`btn text-success w-100 fw-medium ${Styles.greenBtn}`}>
+            <button className={`btn text-success w-100 fw-medium ${Styles.greenBtn}`} onClick={() => router.push("/Admin/AssignAssignments")}>
               Go to Assign Assignment
             </button>
           </div>
@@ -79,7 +80,7 @@ function QuickActions() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default QuickActions;
+export default AdminQuickActionCards;
