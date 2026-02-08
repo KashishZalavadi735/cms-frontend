@@ -1,5 +1,4 @@
 import UpdateAdminForm from '@/components/SuperAdmin/UpdateAdminForm';
-import React from 'react'
 
 function UpdateAdmin() {
   return (

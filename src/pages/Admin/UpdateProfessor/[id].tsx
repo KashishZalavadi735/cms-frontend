@@ -1,5 +1,4 @@
 import UpdateProfesssorForm from '@/components/Admin/UpdateProfesssorForm';
-import React from 'react'
 
 function UpdateProfessor() {
   return (

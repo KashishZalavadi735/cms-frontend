@@ -1,17 +1,24 @@
-interface Props{
-    active: string;
-}
+"use client";
 
-function AssignmentFilterTab({active} : Props) {
+import { AssignmentFilterTabProps } from "@/types/type";
+
+const tabs = ["All", "Pending", "In Process", "Completed"];
+
+function AssignmentFilterTab({ active, setActive }: AssignmentFilterTabProps) {
+
   return (
-    <div className='mt-4 d-flex flex-wrap gap-2'>
-        <button className={`btn px-4 ${ active === "All" ? "btn-primary" : "btn-outline-secondary"}`}>All Assignments</button>
-        <button className={`btn px-4 ${ active === "Pending" ? "btn-primary" : "btn-outline-secondary"}`}>Pending</button>
-        <button className={`btn px-4 ${ active === "Completed" ? "btn-primary" : "btn-outline-secondary"}`}>Completed</button>
-        <button className={`btn px-4 ${ active === "Overdue" ? "btn-primary" : "btn-outline-secondary"}`}>Overdue</button>
-        <button className={`btn px-4 ${ active === "Upcoming" ? "btn-primary" : "btn-outline-secondary"}`}>Upcoming</button>
+    <div className="mt-4 d-flex flex-wrap gap-2">
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          onClick={() => setActive(tab)}
+          className={`btn px-4 ${active === tab ? "btn-primary" : "btn-outline-secondary"}`}
+        >
+          {tab}
+        </button>
+      ))}
     </div>
-  )
+  );
 }
 
-export default AssignmentFilterTab
+export default AssignmentFilterTab;

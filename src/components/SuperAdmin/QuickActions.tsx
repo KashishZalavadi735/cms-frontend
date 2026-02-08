@@ -43,12 +43,12 @@ function QuickActions() {
               <i className="fas fa-tasks"></i>
             </div>
             <div>
-              <h5 className="fw-bold mb-1">Assign Assignment</h5>
-              <p className="text-muted mb-3">Create new assignment for students</p>
+              <h5 className="fw-bold mb-1">Manage Admin</h5>
+              <p className="text-muted mb-3">Manage new HOD to department</p>
             </div>
           </div>
           <div>
-            <button className={`btn text-success w-100 fw-medium ${Styles.greenBtn}`}>
+            <button className={`btn text-success w-100 fw-medium ${Styles.greenBtn}`} onClick={() => router.push("/SuperAdmin/ManageAdmin")}>
               Go to Assign Assignment
             </button>
           </div>

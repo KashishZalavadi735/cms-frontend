@@ -1,56 +1,181 @@
 "use client";
 
+import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ProfessorListData, ProfessorProps } from "@/types/type";
+import { deleteProfessor, getAllProfessor } from "@/services/adminService";
 
-
-function ProfessorList() {
+function ProfessorList({ search }: ProfessorProps) {
   const router = useRouter();
 
-  const handleView = () => {
-    router.push(`/Admin/ViewProfessor`);
+  // Professor stats
+  const [professors, setProfessors] = useState<ProfessorListData[]>([]);
+
+  // Loading stats
+  const [loading, setLoading] = useState(true);
+
+  const [page, setPage] = useState(1);
+  const [limit] = useState(5);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Fetch professors
+  useEffect(() => {
+    const fetchProfessors = async () => {
+      try {
+        const data = await getAllProfessor(page, limit, search);
+        console.log("Professor data:", data);
+
+        setProfessors(data.professors);
+        setTotalPages(data.totalPages);
+      } catch (error: any) {
+        console.error("Error fetching professors data: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfessors();
+  }, [page, search]);
+
+  // View professor
+  const handleView = (id: number) => {
+    router.push(`/Admin/ViewProfessor/${id}`);
   };
 
-  const handleEdit = () => {
-    router.push(`/Admin/UpdateProfessor`);
+  // Edit professor
+  const handleEdit = (id: number) => {
+    router.push(`/Admin/UpdateProfessor/${id}`);
+  };
+
+  // Delete professor
+  const handleDelete = (id: number) => {
+    toast.custom((t) => (
+      <div
+        className={`bg-white shadow-lg rounded-4 p-4 ${
+          t.visible ? "animate-enter" : "animate-leave"
+        }`}
+        style={{ minWidth: "320px" }}
+      >
+        <h6 className="fw-bold text-danger mb-2">Confirm Delete</h6>
+        <p className="mb-3">Are you sure you want to delete this professor?</p>
+
+        <div className="d-flex justify-content-end gap-2">
+          <button
+            className="btn btn-sm btn-secondary"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Cancel
+          </button>
+
+          <button
+            className="btn btn-sm btn-danger"
+            onClick={async () => {
+              const loadingToast = toast.loading("Deleting professor...");
+              try {
+                const response = await deleteProfessor(id);
+                console.log("Professor Deleted: ", response);
+
+                toast.dismiss(loadingToast);
+                toast.success("Professor deleted successfully!");
+              } catch (error) {
+                console.error("Delete professor error:", error);
+                toast.dismiss(loadingToast);
+                toast.error("Failed to delete professor");
+              } finally {
+                toast.dismiss(t.id);
+              }
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    ));
   };
 
   return (
     <div className="card border-0 shadow-sm rounded-4 table-responsive cardAnimation">
       <div className="card-body p-4">
-        <table className="table align-middle">
-          <thead>
-            <tr>
-              <th>PROFESSOR_ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>CONTACT NO</th>
-              <th>BRANCH</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>PROF_101</td>
-              <td>Riddhi Pawar</td>
-              <td>rspawar123@gmail.com</td>
-              <td>9752136842</td>
-              <td>Computer Engineering</td>
-              <td style={{ cursor: "pointer" }}>
-                <i
-                  className="fas fa-eye text-primary"
-                  aria-hidden="true"
-                  onClick={handleView}
-                ></i>
-                <i
-                  className="fas fa-pencil-square text-info mx-3"
-                  aria-hidden="true"
-                  onClick={handleEdit}
-                ></i>
-                <i className="fas fa-trash text-danger" aria-hidden="true"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {loading ? (
+          <h5>Loading Professors...</h5>
+        ) : (
+          <>
+            <table className="table align-middle">
+              <thead>
+                <tr>
+                  <th>PROFESSOR_ID</th>
+                  <th>NAME</th>
+                  <th>EMAIL</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {professors.length > 0 ? (
+                  Array.isArray(professors) &&
+                  professors.map((prof) => (
+                    <tr key={prof.id}>
+                      <td>{prof.code}</td>
+                      <td>{prof.name}</td>
+                      <td>{prof.email}</td>
+                      <td>
+                        <span
+                          className={`badge rounded-pill px-3 ${prof.status.enumValue === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}`}
+                        >
+                          {prof.status.enumValue}
+                        </span>
+                      </td>
+                      <td style={{ cursor: "pointer" }}>
+                        <i
+                          className="fas fa-eye text-primary"
+                          onClick={() => handleView(prof.id)}
+                        ></i>
+                        <i
+                          className="fas fa-pencil-square text-info mx-3"
+                          onClick={() => handleEdit(prof.id)}
+                        ></i>
+                        <i
+                          className="fas fa-trash text-danger"
+                          onClick={() => handleDelete(prof.id)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="text-center text-muted">
+                      No professor found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+
+            {/* Pagination */}
+            <div className="d-flex justify-content-between align-items-center">
+              <button
+                className="btn btn-outline-secondary"
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+              >
+                Previous
+              </button>
+
+              <span>
+                Page {page} of {totalPages}
+              </span>
+
+              <button
+                className="btn btn-outline-secondary"
+                disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import AssignmentForm from "@/components/Shared/AssignmentForm";
 import AssignmentsSummaryCard from "@/components/Shared/AssignmentsSummaryCard";
 import RecentAssignments from "@/components/Shared/RecentAssignments";
-import React from "react";
 
 function AssignAssignments() {
   return (

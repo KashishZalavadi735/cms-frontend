@@ -1,6 +1,41 @@
 "use client";
 
+import { getProfile } from "@/services/studentService";
+import { Profile } from "@/types/type";
+import { useEffect, useState } from "react";
+
+// Initial function
+const getInitials = (name: string) => {
+  return name.split(" ").slice(0,2).map((word) => word.charAt(0)).join("").toUpperCase();
+};
+
 function StudentProfileCard() {
+  // Profile stats
+  const [profile, setProfile] = useState<Profile | null>(null);
+
+  // Loading stats
+  const [Loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetcProfile = async () => {
+      try {
+        const data = await getProfile();
+        console.log("Profile fetched: ", data);
+        setProfile(data);
+      } catch (error:any) {
+        console.error("Failed to fetch profile: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetcProfile();
+  },[]);
+
+  if (Loading) return <div>Loading Profile...</div>
+
+  if (!profile) return null;
+
   return (
     <div className="card border-0 shadow-sm rounded-4 cardAnimation">
       <div className="card-body p-4">
@@ -10,19 +45,19 @@ function StudentProfileCard() {
             className="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold bg-primary"
             style={{ height: "80px", width: "80px", fontSize: "28px" }}
           >
-            DP
+            {getInitials(profile.name)}
           </div>
 
           <div>
-            <h4 className="fw-bold mb-1">Divya Patil</h4>
-            <p className="text-muted mb-2">divya123@gmail.com</p>
+            <h4 className="fw-bold mb-1">{profile.name}</h4>
+            <p className="text-muted mb-2">{profile.email}</p>
 
             <div className="d-flex gap-2">
               <span
                 className="badge text-uppercase rounded-pill px-3 py-2"
                 style={{ color: "#7c3aed", background: "#f3e8ff" }}
               >
-                Student
+                {profile.role.enumValue}
               </span>
               <span className="badge text-uppercase rounded-pill px-3 py-2 text-primary bg-primary-subtle">
                 Academic User
@@ -39,7 +74,7 @@ function StudentProfileCard() {
               <input
                 type="text"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="STUD_101"
+                value={profile.code}
                 readOnly
               />
             </div>
@@ -49,7 +84,7 @@ function StudentProfileCard() {
               <input
                 type="text"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="Divya Patil"
+                value={profile.name}
               />
             </div>
 
@@ -58,7 +93,7 @@ function StudentProfileCard() {
               <input
                 type="email"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="divya123@gmail.com"
+                value={profile.email}
               />
             </div>
 
@@ -67,7 +102,7 @@ function StudentProfileCard() {
               <input
                 type="tel"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="9752136842"
+                value={profile.contactNumber}
               />
             </div>
 
@@ -76,7 +111,7 @@ function StudentProfileCard() {
               <input
                 type="text"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="4"
+                value={profile.semester.enumValue}
                 readOnly
               />
             </div>
@@ -86,7 +121,7 @@ function StudentProfileCard() {
               <input
                 type="text"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="Second Year"
+                value={profile.year.enumValue}
                 readOnly
               />
             </div>
@@ -96,17 +131,7 @@ function StudentProfileCard() {
               <input
                 type="text"
                 className="form-control px-4 py-3 w-100 rounded-3"
-                value="Computer Engineering"
-                readOnly
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label fw-medium mb-2">Role</label>
-              <input
-                type="text"
-                className="form-control px-4 py-3 w-100 rounded-3"
-                value="Student"
+                value={profile.branch.enumValue}
                 readOnly
               />
             </div>

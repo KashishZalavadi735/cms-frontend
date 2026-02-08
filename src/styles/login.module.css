@@ -1,11 +1,11 @@
 /* Page background */
 .bgPage {
-    background: #eef2ff;
+  background: #eef2ff;
 }
 
 /* Login Card */
 .loginCard{
-    width: 430px;
+  width: 430px;
 }
 
 /* Icon */
@@ -63,4 +63,16 @@
 
 .loginBtn:hover {
   opacity: 0.95;
+}
+
+/* Eye icon inside input */
+.eyeIcon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 16px;
+  z-index: 3;
 }

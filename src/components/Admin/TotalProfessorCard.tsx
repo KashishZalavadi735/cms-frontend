@@ -1,5 +1,3 @@
-import React from 'react'
-
 function TotalProfessorCard() {
   return (
     <div className="card border-0 rounded-4 text-white cardAnimation" style={{ background: "linear-gradient(135deg, #22c55e, #16a34a)" }}>
