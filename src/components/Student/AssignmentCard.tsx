@@ -1,118 +1,157 @@
-import React from "react";
+"use client";
 
-function AssignmentCard() {
+import { useRouter } from "next/navigation";
+import { AssignmentCardProps } from "@/types/type";
+import axios from "axios";
+// import { downloadAssignment } from "@/services/assignmentService";
+
+function AssignmentCard({ assignments }: AssignmentCardProps) {
+  const router = useRouter();
+
+  const getStatusBadge = (status: string) =>
+    status === "Completed"
+      ? "bg-success-subtle text-success"
+      : status === "In Process"
+        ? "bg-info-subtle text-info"
+        : "bg-warning-subtle text-warning";
+
+  // Extract file name from URL
+  const getFileName = (url: string) => {
+    if (!url) return "";
+    return url.split("/").pop()!;
+  };
+
+  // Formate date
+  const formatDate = (date: string | Date | null | undefined) => {
+    if (!date) return "N/A";
+
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  // Handle download
+  const handleDownload = async (fileUrl: string) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get(fileUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      });
+
+      const fileName = fileUrl.split("/").pop() || "assignment";
+
+      const url = window.URL.createObjectURL(response.data);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed", error);
+    }
+  };
+
+  if (!assignments || assignments.length === 0) {
+    return <p className="text-muted">No assignments found</p>;
+  }
+
   return (
     <>
-      {/* Card 1 - Pending */}
-      <div className="card border-0 mb-4 shadow-sm rounded-4 cardAnimation">
-        <div className="card-body p-4">
-          {/* Header */}
-          <div className="d-flex justify-content-between align-items-start">
-            <h4 className="fw-bold mb-2">Database Normalization</h4>
+      {assignments.map((item) => {
+        return (
+          <div
+            key={item.id}
+            className="card border-0 mb-4 shadow-sm rounded-4 cardAnimation"
+          >
+            <div className="card-body p-4">
+              {/* Header */}
+              <div className="d-flex justify-content-between align-items-start">
+                <h4 className="fw-bold mb-2">{item.title}</h4>
 
-            <span className="badge rounded-pill bg-warning-subtle text-warning px-3 py-2">
-              Pending
-            </span>
-          </div>
-
-          {/* Tags */}
-          <div className="d-flex flex-wrap gap-2 mb-3">
-            <span className="bagde rounded-pill bg-primary-subtle text-sm-center px-3 py-1 text-primary">
-              Database Management Systems
-            </span>
-            <span className="bagde rounded-pill bg-secondary-subtle text-sm-center px-3 py-1 text-dark">
-              Semester 4
-            </span>
-            <span className="bagde rounded-pill bg-success-subtle text-sm-center px-3 py-1 text-success">
-              Due: 15 Oct 2023
-            </span>
-          </div>
-
-          {/* Description */}
-          <p className="text-muted">
-            Normalize the given database schema up to 3NF. Explain each
-            normalization step with proper reasoning. Submit your solution in
-            PDF format.
-          </p>
-
-          {/* Footer */}
-          <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
-            <div className="d-flex gap-4 text-muted">
-              <div>
-                <i className="fas fa-paperclip me-2"></i>
-                assignment_1.pdf
+                <span
+                  className={`badge rounded-pill px-3 py-2 ${getStatusBadge(item.status)}`}
+                >
+                  {item.status}
+                </span>
               </div>
-              <div>
-                <i className="fas fa-calendar-alt me-2"></i>
-                Assigned: 1 Oct 2023
+
+              {/* Tags */}
+              <div className="d-flex flex-wrap gap-2 mb-3">
+                <span className="bagde rounded-pill bg-primary-subtle text-sm-center px-3 py-1 text-primary">
+                  {item.subject.name}
+                </span>
+                <span className="bagde rounded-pill bg-secondary-subtle text-sm-center px-3 py-1 text-dark">
+                  {item.semester.enumValue}
+                </span>
+                <span className="bagde rounded-pill bg-success-subtle text-sm-center px-3 py-1 text-success">
+                  Due: {formatDate(item.dueDate)}
+                </span>
               </div>
-            </div>
 
-            <div className="d-flex gap-2">
-              <button className="btn btn-outline-primary px-3">
-                <i className="fas fa-download me-2"></i>
-                Download
-              </button>
-              <button className="btn btn-primary px-3">
-                <i className="fas fa-edit me-2"></i>
-                Update Status
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              {/* Description */}
+              <p className="text-muted">{item.description}</p>
 
-      {/* Card 2 - Completed */}
-      <div className="card border-0 mb-4 shadow-sm rounded-4 cardAnimation">
-        <div className="card-body p-4">
-          {/* Header */}
-          <div className="d-flex justify-content-between align-items-start">
-            <h4 className="fw-bold mb-2">OS Scheduling Algorithms</h4>
+              {/* Footer */}
+              <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+                <div className="d-flex gap-4 text-muted">
+                  <div>
+                    <i className="fas fa-paperclip me-2"></i>
+                    {getFileName(item.attachment)}
+                  </div>
+                  <div>
+                    <i className="fas fa-calendar-alt me-2"></i>
+                    Assigned: {formatDate(item.createdAt)}
+                  </div>
+                </div>
 
-            <span className="badge rounded-pill bg-success-subtle text-success px-3 py-2">
-              Completed
-            </span>
-          </div>
+                <div className="d-flex gap-2">
+                  {/* Download */}
+                  {item.attachment && (
+                    <button
+                      className="btn btn-outline-primary px-3"
+                      onClick={() => handleDownload(item.attachment)}
+                    >
+                      <i className="fas fa-download me-2"></i>
+                      Download
+                    </button>
+                  )}
 
-          {/* Tags */}
-          <div className="d-flex flex-wrap gap-2 mb-3">
-            <span className="bagde rounded-pill bg-primary-subtle text-sm-center px-3 py-1 text-primary">
-              Operating Systems
-            </span>
-            <span className="bagde rounded-pill bg-secondary-subtle text-sm-center px-3 py-1 text-dark">
-              Semester 5
-            </span>
-            <span className="bagde rounded-pill bg-success-subtle text-sm-center px-3 py-1 text-success">
-              Due: 10 Oct 2023
-            </span>
-          </div>
+                  {/* Update status */}
+                  {!(item.status === "Completed") && (
+                    <button
+                      className="btn btn-primary px-3"
+                      onClick={() =>
+                        router.push(`/Student/AssignmentStatus/${item.id}`)
+                      }
+                    >
+                      <i className="fas fa-edit me-2"></i>
+                      Update Status
+                    </button>
+                  )}
 
-          {/* Description */}
-          <p className="text-muted">
-            Implement and compare different CPU scheduling algorithms: FCFS,
-            SJF, Priority, Round Robin. Submit code with outputs and analysis.
-          </p>
-
-          {/* Footer */}
-          <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
-            <div className="d-flex gap-4 text-muted">
-              <div>
-                <i className="fas fa-paperclip me-2"></i>
-                os_assignment.zip
-              </div>
-              <div>
-                <i className="fas fa-calendar-alt me-2"></i>
-                Submitted: 8 Oct 2023
+                  {/* View feedback */}
+                  {item.status === "Completed" && (
+                    <button className="btn btn-outline-secondary px-3">
+                      <i className="fas fa-eye me-2"></i>
+                      View Feedback
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-
-            <button className="btn btn-outline-secondary px-3">
-              <i className="fas fa-eye me-2"></i>
-              View Feedback
-            </button>
           </div>
-        </div>
-      </div>
+        );
+      })}
     </>
   );
 }

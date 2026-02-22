@@ -1,0 +1,44 @@
+/* Page background */
+.bgPage {
+    background: #eef2ff;
+}
+
+/* Login Card */
+.OtpVerificationCard{
+    width: 430px;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+
+
+/* Focus effect */
+.input:focus {
+  border-color: #2563eb;
+  z-index: 2;
+}
+
+/* Button */
+.verifyOtpBtn {
+  width: 100%;
+  padding: 12px;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border: none;
+}
+
+.verifyOtpBtn:hover {
+  opacity: 0.95;
+}
