@@ -1,4 +1,5 @@
 "use client";
+
 import Styles from "@/styles/Cards.module.css";
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "@/services/superAdminService";
@@ -10,7 +11,7 @@ function Cards() {
     const fetchStats = async () => {
       try {
         const response = await getDashboardStats();
-        console.log("Response: ", response);
+        console.log("Dashboard cards: ", response);
         setStats(response);
       } catch (error) {
         console.error("Dashboard stats error", error);
@@ -74,7 +75,8 @@ function Cards() {
           <hr className="m-3" />
 
           <small>
-            <i className="fas fa-clock text-warning me-1"></i>{stats.dueThisWeek} due this week
+            <i className="fas fa-clock text-warning me-1"></i>
+            {stats.dueThisWeek} due this week
           </small>
         </div>
       </div>

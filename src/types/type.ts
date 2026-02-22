@@ -1,9 +1,9 @@
-// For Header 
+// For Header
 export interface HeaderProps {
   toggleSidebar: () => void;
 }
 
-// For Sidebar 
+// For Sidebar
 export interface SidebarProps {
   isSidebarOpen: boolean;
   closeSidebar: () => void;
@@ -215,4 +215,70 @@ export interface AdminProfile {
   email: string;
   contactNumber: string;
   newPassword?: string;
+}
+
+// For professor profile
+export interface ProfessorProfile {
+  name: string;
+  email: string;
+  contactNumber: string;
+  newPassword?: string;
+}
+
+// For student profile
+export interface StudentProfile {
+  name: string;
+  email: string;
+  contactNumber: string;
+  newPassword?: string;
+}
+
+// For recent admin
+export interface RecentAdmin {
+  id: string;
+  name: string;
+  branch: string;
+}
+
+// For recent professor
+export interface RecentProfessor {
+  id: number;
+  name: string;
+  subjects: string[];
+}
+
+// For Professor summary
+export interface ProfessorSummary {
+  totalProfessor: number;
+  branchName: string;
+  totalSubjects: number;
+  recentProfessor: RecentProfessor[];
+}
+
+// For recent assignment
+export interface RecentAssignment {
+  id: number;
+  title: string;
+  subject: {
+    id: number;
+    name: string;
+  };
+  semester: {
+    id: number;
+    enumType: string;
+    enumValue: string; 
+  };
+  dueDate: string;
+}
+
+// For notification
+export interface AppNotification {
+  id: number;
+  title: string;
+  message: string;
+  createdAt: string;
+  readStatus: {
+    enumValue: "READ" | "UNREAD";
+  };
+  isRead?: boolean;
 }

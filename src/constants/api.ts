@@ -38,14 +38,20 @@ export const ADMIN_API = {
   GET_BRANCH_SUBJECTS: `${BASE_URL}/api/admin/subjects`,
   PROFILE: `${BASE_URL}/api/admin/me`,
   PROFILE_UPDATE: `${BASE_URL}/api/admin/me`,
+  PROFESSOR_SUMMARY: `${BASE_URL}/api/admin/professor/summary`,
+  CARDS: `${BASE_URL}/api/admin/dashboard-cards`,
 };
 
 export const PROFESSOR_API = {
   PROFILE: `${BASE_URL}/api/professor/me`,
+  PROFILE_UPDATE: `${BASE_URL}/api/professor/me`,
+  CARDS: `${BASE_URL}/api/professor/dashboard-cards`,
 };
 
 export const STUDENT_API = {
   PROFILE: `${BASE_URL}/api/student/me`,
+  PROFILE_UPDATE: `${BASE_URL}/api/student/me`,
+  CARDS: `${BASE_URL}/api/student/dashboard-cards`,
 };
 
 export const ASSIGNMENT_API = {
@@ -56,6 +62,7 @@ export const ASSIGNMENT_API = {
   UPDATE_STATUS: (id: number) => `${BASE_URL}/api/assignment/${id}/status`,
   DOWNLOAD: (fileName: string) =>
     `${BASE_URL}/api/assignment/download/${fileName}`,
+  SUMMARY: `${BASE_URL}/api/assignment/summary`,
 };
 
 export const BRANCH_STUDENT_API = {
@@ -64,4 +71,10 @@ export const BRANCH_STUDENT_API = {
 
 export const ENUM_API = {
   GET: (type: string) => `${BASE_URL}/api/enums/${type}`,
+};
+
+export const NOTIFICATION_API = {
+  GET_NOTIFICATION: `${BASE_URL}/api/notifications`,
+  UNREAD_NOTIFICATION: `${BASE_URL}/api/notifications/unread-count`,
+  MARK_AS_READ: (id: number) => `${BASE_URL}/api/notifications/${id}/read`,
 };

@@ -58,3 +58,11 @@ export const viewAssignmentPdf = async (fileUrl: string) => {
 
   return response.data;
 };
+
+// Assignment summary
+export const getAssignmentSummary = async () => {
+  const response = await axios.get(ASSIGNMENT_API.SUMMARY, {
+    headers: getAuthHeader(),
+  });
+  return response.data.data;
+};

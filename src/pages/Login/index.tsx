@@ -83,7 +83,7 @@ function Login() {
             </div>
             <div className="position-relative">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className={`${styles.input} ${styles.inputBottom}`}
                 value={password}
