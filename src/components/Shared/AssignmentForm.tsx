@@ -72,7 +72,7 @@ function AssignmentForm() {
     const fetchSubjects = async () => {
       try {
         const data = await getSubjectsForAssignment(
-          Number(formData.semesterId),
+          formData.semesterId,
         );
         setSubjects(data);
       } catch (error: any) {

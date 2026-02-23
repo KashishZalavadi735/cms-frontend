@@ -39,17 +39,17 @@ function AdminList({ search }: AdminListProps) {
   }, [page, search]);
 
   // View admin
-  const handleView = (id: number) => {
+  const handleView = (id: string) => {
     router.push(`/SuperAdmin/ViewAdmin/${id}`);
   };
 
   // Edit admin
-  const handleEdit = (id: number) => {
+  const handleEdit = (id: string) => {
     router.push(`/SuperAdmin/UpdateAdmin/${id}`);
   };
 
   // Delete admin
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     toast.custom((t) => (
       <div
         className={`bg-white shadow-lg rounded-4 p-4 ${
@@ -76,10 +76,6 @@ function AdminList({ search }: AdminListProps) {
               try {
                 const response = await deleteAdmin(id);
                 console.log("Admin Deleted: ", response);
-                // // Remove admin from list
-                // setAdmins((prev) =>
-                //   prev.filter((admin) => admin.id !== id)
-                // );
 
                 toast.dismiss(loadingToast);
                 toast.success("Admin deleted successfully!");

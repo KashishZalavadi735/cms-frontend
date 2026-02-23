@@ -30,7 +30,7 @@ export const getAllProfessor = async (
 };
 
 // Return single Professor
-export const getProfessorById = async (id: number) => {
+export const getProfessorById = async (id: string) => {
   const response = await axios.get(ADMIN_API.GET_PROFESSOR_BY_ID(id), {
     headers: getAuthHeader(),
   });
@@ -38,7 +38,7 @@ export const getProfessorById = async (id: number) => {
 };
 
 // Update Professor
-export const updateProfessor = async (id: number, ProfessorData: any) => {
+export const updateProfessor = async (id: string, ProfessorData: any) => {
   const response = await axios.put(
     ADMIN_API.UPDATE_PROFESSOR(id),
     ProfessorData,
@@ -51,8 +51,8 @@ export const updateProfessor = async (id: number, ProfessorData: any) => {
 
 // Update Professor subjects
 export const updateProfessorSubjects = async (
-  id: number,
-  data: { subjectIds: number[] },
+  id: string,
+  data: { subjectIds: string[] },
 ) => {
   const response = await axios.put(
     ADMIN_API.UPDATE_PROFESSOR_SUBJECTS(id),
@@ -65,7 +65,7 @@ export const updateProfessorSubjects = async (
 };
 
 // Delete Professor
-export const deleteProfessor = async (id: number) => {
+export const deleteProfessor = async (id: string) => {
   const response = await axios.delete(ADMIN_API.DELETE_PROFESSOR(id), {
     headers: getAuthHeader(),
   });

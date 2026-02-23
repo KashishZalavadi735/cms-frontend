@@ -19,8 +19,8 @@ function ViewAdmin() {
   useEffect(() => {
     const fetchAdminDetails = async () => {
       try {
-        if (!id) return;
-        const data = await getAdminById(Number(id));
+        if (!id || Array.isArray(id)) return;
+        const data = await getAdminById(id);
         console.log("Admin details: ", data);
 
         setAdminData(data);

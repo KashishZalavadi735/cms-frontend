@@ -167,7 +167,7 @@ function Header({ toggleSidebar }: HeaderProps) {
   };
 
   // Mark notification as read
-  const handleMarkAsRead = async (id: number) => {
+  const handleMarkAsRead = async (id: string) => {
     try {
       await markmarkNotificationAsRead(id);
 

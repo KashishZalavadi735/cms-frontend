@@ -27,7 +27,7 @@ function AddProfessorForm() {
     contactNumber: "",
     branchValue: "",
     subjectIds: [],
-    statusId: 25,
+    statusId: "",
   });
 
   // Load branch
@@ -107,8 +107,8 @@ function AddProfessorForm() {
 
   // Multi subject select
   const handleSubjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedIds = Array.from(e.target.selectedOptions).map((opt) =>
-      Number(opt.value),
+    const selectedIds = Array.from(e.target.selectedOptions).map(
+      (opt) => opt.value,
     );
     setFormData((prev) => ({ ...prev, subjectIds: selectedIds }));
   };

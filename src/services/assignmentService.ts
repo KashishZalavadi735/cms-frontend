@@ -16,7 +16,7 @@ export const createAssignment = async (data: any) => {
 };
 
 // Get subjects for assignment
-export const getSubjectsForAssignment = async (semesterId: number) => {
+export const getSubjectsForAssignment = async (semesterId: string) => {
   const response = await axios.get(ASSIGNMENT_API.SUBJECT(semesterId), {
     headers: getAuthHeader(),
   });
@@ -33,8 +33,8 @@ export const getAllAssignment = async () => {
 
 // Update assignment status
 export const updateAssignmentStatus = async (
-  assignmentId: number,
-  statusId: number,
+  assignmentId: string,
+  statusId: string,
 ) => {
   const response = await axios.put(
     ASSIGNMENT_API.UPDATE_STATUS(assignmentId),

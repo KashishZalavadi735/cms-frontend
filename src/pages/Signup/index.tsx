@@ -73,9 +73,9 @@ function Signup() {
 
       const responseData = {
         ...formData,
-        branchId: Number(formData.branchId),
-        semesterId: Number(formData.semesterId),
-        yearId: Number(formData.yearId)
+        branchId: formData.branchId,
+        semesterId: formData.semesterId,
+        yearId: formData.yearId,
       };
 
       const response = await signupService(responseData);

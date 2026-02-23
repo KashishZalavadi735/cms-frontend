@@ -15,7 +15,7 @@ function AssignmentStatusPage() {
   const { id } = useParams();
 
   // Get assignment for update
-  const assignmentId = Number(id);
+  const assignmentId = Array.isArray(id) ? id[0] : id;
 
   // Assignment state
   const [assignment, setAssignment] = useState<any>(null);
@@ -71,9 +71,11 @@ function AssignmentStatusPage() {
       selectedStatus.id,
     );
     console.log("Status updated: ", response);
-    
+
     toast.success("Status Updated Successfully!");
-    router.push(`/Student/MyAssignment?updatedId=${assignmentId}&status=${status}`);
+    router.push(
+      `/Student/MyAssignment?updatedId=${assignmentId}&status=${status}`,
+    );
   };
 
   if (!assignment)
@@ -82,10 +84,12 @@ function AssignmentStatusPage() {
   return (
     <div className="mx-4 py-4">
       <h3 className="fw-bold fs-3 mb-0">Update Assignment Status</h3>
-      <p className="fs-6 text-muted">{assignment.title}</p>
 
       <div className="container-fluid py-3">
         <div className="card border-0 p-4 shadow-sm rounded-4 cardAnimation">
+          <p>
+            <strong>Title:</strong> {assignment.title}
+          </p>
           <p>
             <strong>Subject:</strong> {assignment.subject?.name}
           </p>

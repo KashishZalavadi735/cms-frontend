@@ -27,29 +27,29 @@ export interface SignupData {
   email: string;
   contactNumber: string;
   password: string;
-  branchId: number | string;
-  semesterId: number | string;
-  yearId: number | string;
+  branchId: string;
+  semesterId: string;
+  yearId: string;
 }
 
 // For token decode
 export interface DecodedToken {
-  id: number;
-  roleId: number;
-  branchId: number;
-  semesterId?: number;
+  id: string;
+  roleId: string;
+  branchId: string;
+  semesterId?: string;
 }
 
 // For enums
 export interface EnumOption {
-  id: number;
+  id: string;
   enumType: string;
   enumValue: string;
 }
 
 // For Subject
 export interface Subject {
-  id: number;
+  id: string;
   name: string;
   semester: {
     enumValue: string;
@@ -62,7 +62,7 @@ export interface AdminData {
   email: string;
   contactNumber: string;
   branchValue: string;
-  statusId: number;
+  statusId: string;
 }
 
 // Admin list props
@@ -72,7 +72,7 @@ export interface AdminListProps {
 
 // For Admin list data
 export interface AdminListData {
-  id: number;
+  id: string;
   name: string;
   email: string;
   contactNumber: string;
@@ -83,7 +83,7 @@ export interface AdminListData {
 
 // For Admin data
 export interface Admin {
-  id: number;
+  id: string;
   name: string;
   email: string;
   contactNumber: string;
@@ -102,35 +102,35 @@ export interface ProfessorData {
   email: string;
   contactNumber: string;
   branchValue: string;
-  subjectIds: number[];
-  statusId: number;
+  subjectIds: string[];
+  statusId: string;
 }
 
 // For Professor list data
 export interface ProfessorListData {
-  id: number;
+  id: string;
   code: string;
   name: string;
   email: string;
   contactNumber: string;
 
   branch: {
-    id: number;
+    id: string;
     enumValue: string;
   };
 
   status: {
-    id: number;
+    id: string;
     enumValue: string;
   };
 
   professorSubjects: {
-    id: number;
+    id: string;
     subject: {
-      id: number;
+      id: string;
       name: string;
       semester: {
-        id: number;
+        id: string;
         enumValue: string;
       };
     };
@@ -144,7 +144,7 @@ export interface StudentProps {
 
 // For Student list data
 export interface StudentListData {
-  id: number;
+  id: string;
   name: string;
   email: string;
   contactNumber: string;
@@ -183,7 +183,7 @@ export interface AssignmentCardProps {
 
 // For Profile
 export interface Profile {
-  id: number;
+  id: string;
   name: string;
   email: string;
   contactNumber: string;
@@ -242,7 +242,7 @@ export interface RecentAdmin {
 
 // For recent professor
 export interface RecentProfessor {
-  id: number;
+  id: string;
   name: string;
   subjects: string[];
 }
@@ -257,14 +257,14 @@ export interface ProfessorSummary {
 
 // For recent assignment
 export interface RecentAssignment {
-  id: number;
+  id: string;
   title: string;
   subject: {
-    id: number;
+    id: string;
     name: string;
   };
   semester: {
-    id: number;
+    id: string;
     enumType: string;
     enumValue: string; 
   };
@@ -273,7 +273,7 @@ export interface RecentAssignment {
 
 // For notification
 export interface AppNotification {
-  id: number;
+  id: string;
   title: string;
   message: string;
   createdAt: string;
