@@ -12,7 +12,8 @@ import { EnumOption } from "@/types/type";
 
 function AssignmentStatusPage() {
   const router = useRouter();
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id;
 
   // Get assignment for update
   const assignmentId = Array.isArray(id) ? id[0] : id;
