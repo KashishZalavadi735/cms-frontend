@@ -26,7 +26,7 @@ function UpdateAdminForm() {
     email: "",
     contactNumber: "",
     branchValue: "",
-    statusId: 25,
+    statusId: "",
   });
 
   // Fetch branches
@@ -49,7 +49,9 @@ function UpdateAdminForm() {
 
     const fetchAdmin = async () => {
       try {
-        const data = await getAdminById(Number(id));
+        if (!id || Array.isArray(id)) return;
+
+        const data = await getAdminById(id);
 
         setFormData({
           name: data.name ?? "",
@@ -144,7 +146,8 @@ function UpdateAdminForm() {
     }
 
     try {
-      const response = await updateAdmin(Number(id), {
+      if (!id || Array.isArray(id)) return;
+      const response = await updateAdmin(id, {
         name: formData.name,
         email: formData.email,
         contactNumber: formData.contactNumber,

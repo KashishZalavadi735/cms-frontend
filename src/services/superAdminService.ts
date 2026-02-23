@@ -30,7 +30,7 @@ export const getAllAdmins = async (
 };
 
 // Return single admin
-export const getAdminById = async (id: number) => {
+export const getAdminById = async (id: string) => {
   const response = await axios.get(SUPER_ADMIN_API.GET_ADMIN_BY_ID(id), {
     headers: getAuthHeader(),
   });
@@ -38,7 +38,7 @@ export const getAdminById = async (id: number) => {
 };
 
 // Update admin
-export const updateAdmin = async (id: number, AdminData: any) => {
+export const updateAdmin = async (id: string, AdminData: any) => {
   const response = await axios.put(
     SUPER_ADMIN_API.UPDATE_ADMIN(id),
     AdminData,
@@ -50,7 +50,7 @@ export const updateAdmin = async (id: number, AdminData: any) => {
 };
 
 // Delete admin
-export const deleteAdmin = async (id: number) => {
+export const deleteAdmin = async (id: string) => {
   const response = await axios.delete(SUPER_ADMIN_API.DELETE_ADMIN(id), {
     headers: getAuthHeader(),
   });

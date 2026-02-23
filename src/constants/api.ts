@@ -18,9 +18,9 @@ export const FORGOT_PASSWORD_API = {
 export const SUPER_ADMIN_API = {
   CREATE_ADMIN: `${BASE_URL}/api/super-admin/admin`,
   GET_ALL_ADMIN: `${BASE_URL}/api/super-admin/admin`,
-  GET_ADMIN_BY_ID: (id: number) => `${BASE_URL}/api/super-admin/admin/${id}`,
-  UPDATE_ADMIN: (id: number) => `${BASE_URL}/api/super-admin/admin/${id}`,
-  DELETE_ADMIN: (id: number) => `${BASE_URL}/api/super-admin/admin/${id}`,
+  GET_ADMIN_BY_ID: (id: string) => `${BASE_URL}/api/super-admin/admin/${id}`,
+  UPDATE_ADMIN: (id: string) => `${BASE_URL}/api/super-admin/admin/${id}`,
+  DELETE_ADMIN: (id: string) => `${BASE_URL}/api/super-admin/admin/${id}`,
   PROFILE: `${BASE_URL}/api/super-admin/me`,
   PROFILE_UPDATE: `${BASE_URL}/api/super-admin/me`,
   CARDS: `${BASE_URL}/api/super-admin/dashboard-cards`,
@@ -30,10 +30,10 @@ export const SUPER_ADMIN_API = {
 export const ADMIN_API = {
   CREATE_PROFESSOR: `${BASE_URL}/api/admin/professor`,
   GET_ALL_PROFESSOR: `${BASE_URL}/api/admin/professor`,
-  GET_PROFESSOR_BY_ID: (id: number) => `${BASE_URL}/api/admin/professor/${id}`,
-  UPDATE_PROFESSOR: (id: number) => `${BASE_URL}/api/admin/professor/${id}`,
-  DELETE_PROFESSOR: (id: number) => `${BASE_URL}/api/admin/professor/${id}`,
-  UPDATE_PROFESSOR_SUBJECTS: (id: number) =>
+  GET_PROFESSOR_BY_ID: (id: string) => `${BASE_URL}/api/admin/professor/${id}`,
+  UPDATE_PROFESSOR: (id: string) => `${BASE_URL}/api/admin/professor/${id}`,
+  DELETE_PROFESSOR: (id: string) => `${BASE_URL}/api/admin/professor/${id}`,
+  UPDATE_PROFESSOR_SUBJECTS: (id: string) =>
     `${BASE_URL}/api/admin/professor/${id}/subjects`,
   GET_BRANCH_SUBJECTS: `${BASE_URL}/api/admin/subjects`,
   PROFILE: `${BASE_URL}/api/admin/me`,
@@ -56,10 +56,10 @@ export const STUDENT_API = {
 
 export const ASSIGNMENT_API = {
   CREATE: `${BASE_URL}/api/assignment`,
-  SUBJECT: (semesterId: number) =>
+  SUBJECT: (semesterId: string) =>
     `${BASE_URL}/api/assignment/for-assignment?semesterId=${semesterId}`,
   GET_ALL: `${BASE_URL}/api/assignment/students`,
-  UPDATE_STATUS: (id: number) => `${BASE_URL}/api/assignment/${id}/status`,
+  UPDATE_STATUS: (id: string) => `${BASE_URL}/api/assignment/${id}/status`,
   DOWNLOAD: (fileName: string) =>
     `${BASE_URL}/api/assignment/download/${fileName}`,
   SUMMARY: `${BASE_URL}/api/assignment/summary`,
@@ -76,5 +76,5 @@ export const ENUM_API = {
 export const NOTIFICATION_API = {
   GET_NOTIFICATION: `${BASE_URL}/api/notifications`,
   UNREAD_NOTIFICATION: `${BASE_URL}/api/notifications/unread-count`,
-  MARK_AS_READ: (id: number) => `${BASE_URL}/api/notifications/${id}/read`,
+  MARK_AS_READ: (id: string) => `${BASE_URL}/api/notifications/${id}/read`,
 };

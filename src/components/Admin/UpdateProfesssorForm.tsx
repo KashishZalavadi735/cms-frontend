@@ -31,7 +31,7 @@ function UpdateProfesssorForm() {
     contactNumber: "",
     branchValue: "",
     subjectIds: [],
-    statusId: 25,
+    statusId: "",
   });
 
   // Fetch professor data
@@ -40,8 +40,10 @@ function UpdateProfesssorForm() {
 
     const fetchProfessor = async () => {
       try {
+        if (!id || Array.isArray(id)) return;
+
         const [professor, branchSubjects] = await Promise.all([
-          getProfessorById(Number(id)),
+          getProfessorById(id),
           getBranchSubjects(),
         ]);
 
@@ -127,8 +129,8 @@ function UpdateProfesssorForm() {
 
   // Multi subject select
   const handleSubjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedIds = Array.from(e.target.selectedOptions).map((opt) =>
-      Number(opt.value),
+    const selectedIds = Array.from(e.target.selectedOptions).map(
+      (opt) => opt.value,
     );
     setFormData((prev) => ({ ...prev, subjectIds: selectedIds }));
   };
@@ -143,8 +145,10 @@ function UpdateProfesssorForm() {
     }
 
     try {
+      if (!id || Array.isArray(id)) return;
+      
       // Update professor info
-      const ProfessorResponse = await updateProfessor(Number(id), {
+      const ProfessorResponse = await updateProfessor(id, {
         name: formData.name,
         email: formData.email,
         contactNumber: formData.contactNumber,
@@ -152,7 +156,7 @@ function UpdateProfesssorForm() {
       });
 
       // Update professor subjects
-      const SubjectResponse = await updateProfessorSubjects(Number(id), {
+      const SubjectResponse = await updateProfessorSubjects(id, {
         subjectIds: formData.subjectIds,
       });
 

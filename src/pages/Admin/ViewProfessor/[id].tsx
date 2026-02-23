@@ -21,9 +21,9 @@ function ViewProfessor() {
   useEffect(() => {
     const fetchProfessorDetails = async () => {
       try {
-        if (!id) return;
+        if (!id || Array.isArray(id)) return;
         
-        const data = await getProfessorById(Number(id));
+        const data = await getProfessorById(id);
         console.log("Professor details: ", data);
 
         setProfessorData(data);

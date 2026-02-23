@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
+import { RecentProfessor } from "@/types/type";
+import { getProfessorSummary } from "@/services/adminService";
 import AddProfessorForm from "@/components/Admin/AddProfessorForm";
 import RecentProfessors from "@/components/Admin/RecentProfessors";
 import TotalProfessorCard from "@/components/Admin/TotalProfessorCard";
-import { getProfessorSummary } from "@/services/adminService";
-import { RecentProfessor } from "@/types/type";
-import { useEffect, useState } from "react";
 
 function AddProfessor() {
   // Loading state

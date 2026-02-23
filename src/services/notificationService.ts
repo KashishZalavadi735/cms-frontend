@@ -25,7 +25,7 @@ export const countUnreadNotification = async (): Promise<number>=> {
 };
 
 // Mark as read notification
-export const markmarkNotificationAsRead = async (id: number) => {
+export const markmarkNotificationAsRead = async (id: string) => {
     const response = await axios.patch(NOTIFICATION_API.MARK_AS_READ(id), {}, {
         headers: getAuthHeader()
     });

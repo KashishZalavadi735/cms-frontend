@@ -39,17 +39,17 @@ function ProfessorList({ search }: ProfessorProps) {
   }, [page, search]);
 
   // View professor
-  const handleView = (id: number) => {
+  const handleView = (id: string) => {
     router.push(`/Admin/ViewProfessor/${id}`);
   };
 
   // Edit professor
-  const handleEdit = (id: number) => {
+  const handleEdit = (id: string) => {
     router.push(`/Admin/UpdateProfessor/${id}`);
   };
 
   // Delete professor
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     toast.custom((t) => (
       <div
         className={`bg-white shadow-lg rounded-4 p-4 ${

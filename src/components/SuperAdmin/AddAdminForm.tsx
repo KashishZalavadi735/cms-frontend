@@ -22,7 +22,7 @@ function AddAdminForm() {
     email: "",
     contactNumber: "",
     branchValue: "",
-    statusId: 25,
+    statusId: "",
   });
 
   // Fetch branches
@@ -30,6 +30,7 @@ function AddAdminForm() {
     const fetchBranches = async () => {
       try {
         const data = await getEnumByType("BRANCH");
+        console.log("Branch Enum: ", data);
         setBranches(data);
       } catch (error: any) {
         console.error("Failed to load branches", error);
@@ -119,6 +120,14 @@ function AddAdminForm() {
       console.log("Admin created: ", response);
 
       toast.success("Admin added successfully!");
+      // Clear form
+      setFormData({
+        name: "",
+        email: "",
+        contactNumber: "",
+        branchValue: "",
+        statusId: "",
+      });
 
       router.push("/SuperAdmin/CreateAdmin");
     } catch (error: any) {
@@ -181,6 +190,7 @@ function AddAdminForm() {
               <label className="form-label fw-medium mb-2">Branch</label>
               <select
                 name="branchValue"
+                value={formData.branchValue}
                 onChange={handleChange}
                 className={`form-select px-4 py-3 w-100 rounded-3 ${error.branchValue ? "is-invalid" : ""}`}
               >
