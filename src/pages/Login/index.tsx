@@ -24,9 +24,9 @@ function Login() {
   // Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      setLoading(true);
 
       const res = await loginService({ email, password });
       console.log("Login data: ", res);
