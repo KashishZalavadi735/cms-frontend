@@ -23,14 +23,31 @@ function AddProfessor() {
 
   // Fetch professor summary
   useEffect(() => {
+    const storedSummary = sessionStorage.getItem("professorSummary");
+
+    if (storedSummary) {
+      const data = JSON.parse(storedSummary);
+
+      setRecentProfessor(data.recentProfessors);
+      setTotalProfessor(data.totalProfessors);
+      setBranchName(data.branchName);
+      setTotalSubjects(data.totalSubjects);
+      setLoading(false);
+      return;
+    }
+
     const fetchSummary = async () => {
       try {
         const data = await getProfessorSummary();
         console.log("Professor summary: ", data);
+
         setRecentProfessor(data.recentProfessors);
         setTotalProfessor(data.totalProfessors);
         setBranchName(data.branchName);
         setTotalSubjects(data.totalSubjects);
+
+        // Save to cache
+        sessionStorage.setItem("professorSummary", JSON.stringify(data));
       } catch (error: any) {
         console.error("Failed to fetch professor summary: ", error);
       } finally {

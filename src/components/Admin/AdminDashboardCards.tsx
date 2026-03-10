@@ -19,6 +19,14 @@ function AdminDashboardCards() {
 
   // Fetch card stats
   useEffect(() => {
+    const storedStats = sessionStorage.getItem("dashboardStats");
+
+    // If data already exists
+    if (storedStats) {
+      setStats(JSON.parse(storedStats));
+      return;
+    }
+
     const fetchStats = async () => {
       try {
         const response = await getDashboardStats();

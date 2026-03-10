@@ -20,13 +20,27 @@ function StudentList({ search }: StudentProps) {
 
   // Fetch students
   useEffect(() => {
+    const cacheKey = `students_page_${page}_search_${search}`;
+
+    const storedStudents = sessionStorage.getItem(cacheKey);
+
+    if (storedStudents) {
+      const data = JSON.parse(storedStudents);
+      setStudents(data.students);
+      setTotalPages(data.totalPages);
+      setLoading(false);
+      return;
+    }
+
     const fetchStudents = async () => {
       try {
         const data = await ViewStudents(page, limit, search);
         console.log("Students data:", data);
-        
+
         setStudents(data.students);
         setTotalPages(data.totalPages);
+
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
       } catch (error: any) {
         console.error("Error fetching students data: ", error);
       } finally {

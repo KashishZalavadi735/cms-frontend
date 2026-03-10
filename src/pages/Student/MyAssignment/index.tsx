@@ -16,10 +16,24 @@ function MyAssignment() {
 
   // Fetch assignments
   useEffect(() => {
+    const storedAssignments = sessionStorage.getItem("studentAssignments");
+
+    if (storedAssignments) {
+      setAssignments(JSON.parse(storedAssignments));
+      return;
+    }
+
     const fetchAssignments = async () => {
-      const data = await getAllAssignment();
-      console.log("Assignments data: ", data);      
-      setAssignments(data);
+      try {
+        const data = await getAllAssignment();
+        console.log("Assignments data: ", data);
+
+        setAssignments(data);
+
+        sessionStorage.setItem("studentAssignments", JSON.stringify(data));
+      } catch (error) {
+        console.error("Failed to fetch assignments", error);
+      }
     };
 
     fetchAssignments();

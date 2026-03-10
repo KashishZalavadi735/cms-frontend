@@ -35,13 +35,28 @@ function ProfileCard() {
 
   // Fetch profile
   useEffect(() => {
+    const storedProfile = sessionStorage.getItem("superAdminProfile");
+
+    if (storedProfile) {
+      const data = JSON.parse(storedProfile);
+
+      setProfile(data);
+      setName(data.name);
+      setContactNumber(data.contactNumber);
+      setLoading(false);
+      return;
+    }
+
     const fetcProfile = async () => {
       try {
         const data = await getProfile();
         console.log("Profile fetched: ", data);
+
         setProfile(data);
         setName(data.name);
         setContactNumber(data.contactNumber);
+
+        sessionStorage.setItem("superAdminProfile", JSON.stringify(data));
       } catch (error: any) {
         console.error("Failed to fetch profile: ", error);
       } finally {
@@ -79,6 +94,19 @@ function ProfileCard() {
       console.log("Updated Profile: ", response);
 
       toast.success("Profile updated successfully !");
+
+      const updatedProfile = {
+        ...profile,
+        name,
+        contactNumber,
+      };
+
+      setProfile(updatedProfile as Profile);
+
+      sessionStorage.setItem(
+        "superAdminProfile",
+        JSON.stringify(updatedProfile),
+      );
 
       setNewPassword("");
       setConfirmPassword("");

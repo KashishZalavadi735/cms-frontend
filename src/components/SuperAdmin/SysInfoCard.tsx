@@ -12,11 +12,22 @@ function SysInfoCard() {
 
   // Fetch stats
   useEffect(() => {
+    const storedStats = sessionStorage.getItem("dashboardStats");
+
+    if (storedStats) {
+      setStats(JSON.parse(storedStats));
+      setLoading(false);
+      return;
+    }
+
     const fetchStats = async () => {
       try {
         const data = await getDashboardStats();
         console.log("Stats data: ", data);
+
         setStats(data);
+
+        sessionStorage.setItem("dashboardStats", JSON.stringify(data));
       } catch (error) {
         console.error("Failed to load system info", error);
       } finally {

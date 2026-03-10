@@ -21,6 +21,18 @@ function ProfessorList({ search }: ProfessorProps) {
 
   // Fetch professors
   useEffect(() => {
+    const cacheKey = `professors_page_${page}_search_${search}`;
+
+    const storedProfessors = sessionStorage.getItem(cacheKey);
+
+    if (storedProfessors) {
+      const data = JSON.parse(storedProfessors);
+      setProfessors(data.professors);
+      setTotalPages(data.totalPages);
+      setLoading(false);
+      return;
+    }
+
     const fetchProfessors = async () => {
       try {
         const data = await getAllProfessor(page, limit, search);
@@ -28,6 +40,8 @@ function ProfessorList({ search }: ProfessorProps) {
 
         setProfessors(data.professors);
         setTotalPages(data.totalPages);
+
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
       } catch (error: any) {
         console.error("Error fetching professors data: ", error);
       } finally {

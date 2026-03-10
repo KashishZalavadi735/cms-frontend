@@ -13,10 +13,21 @@ function ManageProfessor() {
 
   // Fetch branch value using profile data
   useEffect(() => {
+    const storedProfile = sessionStorage.getItem("profileData");
+
+    if (storedProfile) {
+      const data = JSON.parse(storedProfile);
+      setBranchName(data?.branch?.enumValue ?? "");
+      return;
+    }
+
     const fetchProfile = async () => {
       try {
         const response = await getProfile();
+
         setBranchName(response?.branch?.enumValue ?? "");
+
+        sessionStorage.setItem("profileData", JSON.stringify(response));
       } catch (error: any) {
         console.error("Failed to fetch branch name");
       }

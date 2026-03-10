@@ -6,24 +6,35 @@ import StudentList from "@/components/Shared/StudentList";
 
 function BranchStudents() {
   // Search states
-    const [search, setSearch] = useState("");
-  
-    // Branch name states
-    const [branchName, setBranchName] = useState("");
-  
-    // Fetch branch value using profile data
-    useEffect(() => {
-      const fetchProfile = async () => {
-        try {
-          const response = await getProfile();
-          setBranchName(response.branch.enumValue ?? "");
-        } catch (error: any) {
-          console.error("Failed to fetch branch name");
-        }
-      };
-  
-      fetchProfile();
-    }, []);
+  const [search, setSearch] = useState("");
+
+  // Branch name states
+  const [branchName, setBranchName] = useState("");
+
+  // Fetch branch value using profile data
+  useEffect(() => {
+    const storedProfile = sessionStorage.getItem("professorProfile");
+
+    if (storedProfile) {
+      const data = JSON.parse(storedProfile);
+      setBranchName(data?.branch?.enumValue ?? "");
+      return;
+    }
+
+    const fetchProfile = async () => {
+      try {
+        const response = await getProfile();
+
+        setBranchName(response?.branch?.enumValue ?? "");
+
+        sessionStorage.setItem("professorProfile", JSON.stringify(response));
+      } catch (error: any) {
+        console.error("Failed to fetch branch name");
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <div className="mx-4 py-4">

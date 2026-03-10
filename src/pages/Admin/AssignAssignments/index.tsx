@@ -25,16 +25,33 @@ function AssignAssignments() {
 
   // Fetch assignment summary
   useEffect(() => {
+    const storedSummary = sessionStorage.getItem("assignmentSummary");
+
+    if (storedSummary) {
+      const data = JSON.parse(storedSummary);
+
+      setRecentAssignment(data.recentAssignment);
+      setTotalAssignment(data.total);
+      setActiveAssignment(data.active);
+      setDtwAssignment(data.dueThisWeek);
+      setLoading(false);
+      return;
+    }
+
     const fetchSummary = async () => {
       try {
         const data = await getAssignmentSummary();
         console.log("Assignment summary: ", data);
+
         setRecentAssignment(data.recentAssignment);
         setTotalAssignment(data.total);
         setActiveAssignment(data.active);
         setDtwAssignment(data.dueThisWeek);
+
+        // Save in session storage
+        sessionStorage.setItem("assignmentSummary", JSON.stringify(data));
       } catch (error: any) {
-        console.error("Failed tp fetch assignment summary: ", error);
+        console.error("Failed to fetch assignment summary: ", error);
       } finally {
         setLoading(false);
       }

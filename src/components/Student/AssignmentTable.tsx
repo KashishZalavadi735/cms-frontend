@@ -37,7 +37,6 @@ function AssignmentTable({ search }: AssignmentProps) {
         ? "bg-info-subtle text-info"
         : "bg-warning-subtle text-warning";
 
-  
   const handleViewPdf = async (fileUrl: string) => {
     try {
       const blob = await viewAssignmentPdf(fileUrl);
@@ -50,12 +49,22 @@ function AssignmentTable({ search }: AssignmentProps) {
 
   // Fetch assignments
   useEffect(() => {
+    const storedAssignments = sessionStorage.getItem("studentAssignments");
+
+    if (storedAssignments) {
+      setAssignments(JSON.parse(storedAssignments));
+      setLoading(false);
+      return;
+    }
+
     const fetchAssignments = async () => {
       try {
         const response = await getAllAssignment();
         console.log("Assignments: ", response);
 
         setAssignments(response);
+
+        sessionStorage.setItem("studentAssignments", JSON.stringify(response));
       } catch (err) {
         console.error("Failed to fetch assignments", err);
       } finally {
@@ -110,7 +119,6 @@ function AssignmentTable({ search }: AssignmentProps) {
               )}
 
               {currentAssignments.map((item) => {
-
                 return (
                   <tr key={item.id}>
                     <td className="fw-semibold">{item.title}</td>

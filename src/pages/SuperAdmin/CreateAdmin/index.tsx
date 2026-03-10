@@ -19,13 +19,29 @@ function CreateAdmin() {
 
   // Fetch admin summary
   useEffect(() => {
+    const storedSummary = sessionStorage.getItem("adminSummary");
+
+    if (storedSummary) {
+      const data = JSON.parse(storedSummary);
+
+      setRecentAdmins(data.recentAdmins);
+      setTotalAdmins(data.totalAdmins);
+      setTotalDepartments(data.totalDepartments);
+      setLoading(false);
+      return;
+    }
+
     const fetchSummary = async () => {
       try {
         const data = await getAdminSummary();
         console.log("Admin summary: ", data);
+
         setRecentAdmins(data.recentAdmins);
         setTotalAdmins(data.totalAdmins);
         setTotalDepartments(data.totalDepartments);
+
+        // save in sessionStorage
+        sessionStorage.setItem("adminSummary", JSON.stringify(data));
       } catch (error: any) {
         console.error("Failed to fetch admin summary", error);
       } finally {
@@ -55,7 +71,11 @@ function CreateAdmin() {
           {/* Right */}
           <div className="col-lg-4 col-12">
             <RecentAdmins admins={recentAdmins} loading={loading} />
-            <TotalAdminsCard totalAdmins={totalAdmins} totalDepartments={totalDepartments} loading={loading} />
+            <TotalAdminsCard
+              totalAdmins={totalAdmins}
+              totalDepartments={totalDepartments}
+              loading={loading}
+            />
           </div>
         </div>
       </div>

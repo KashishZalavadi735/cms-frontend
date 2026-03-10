@@ -18,6 +18,14 @@ function ProfessorDashboardCards() {
   });
 
   // Fetch card stats
+  const storedStats = sessionStorage.getItem("dashboardStats");
+
+  // If data already exists
+  if (storedStats) {
+    setStats(JSON.parse(storedStats));
+    return;
+  }
+
   useEffect(() => {
     const fetchStats = async () => {
       try {

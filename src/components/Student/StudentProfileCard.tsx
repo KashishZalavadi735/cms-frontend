@@ -20,7 +20,7 @@ function StudentProfileCard() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   // Loading stats
-  const [Loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // Editable fields
   // Name stats
@@ -38,14 +38,38 @@ function StudentProfileCard() {
 
   // Fetch profile
   useEffect(() => {
-    const fetcProfile = async () => {
+    const storedProfile = sessionStorage.getItem("studentProfile");
+
+    if (storedProfile) {
+      const data = JSON.parse(storedProfile);
+
+      setProfile(data);
+      setName(data.name);
+      setEmail(data.email);
+      setContactNumber(data.contactNumber);
+      setLoading(false);
+      return;
+    }
+
+    const fetchProfile = async () => {
       try {
         const data = await getProfile();
         console.log("Profile fetched: ", data);
-        setProfile(data);
+
+        const profileData = {
+          ...data,
+          role: data.role ?? { enumValue: "N/A" },
+          branch: data.branch ?? { enumValue: "Not Assigned" },
+          semester: data.semester ?? { enumValue: "Not Assigned" },
+          year: data.year ?? { enumValue: "Not Assigned" },
+        };
+
+        setProfile(profileData);
         setName(data.name);
         setEmail(data.email);
         setContactNumber(data.contactNumber);
+
+        sessionStorage.setItem("studentProfile", JSON.stringify(profileData));
       } catch (error: any) {
         console.error("Failed to fetch profile: ", error);
       } finally {
@@ -53,7 +77,7 @@ function StudentProfileCard() {
       }
     };
 
-    fetcProfile();
+    fetchProfile();
   }, []);
 
   // Handle save
@@ -83,13 +107,18 @@ function StudentProfileCard() {
       });
       console.log("Profile updated: ", data);
 
-      setProfile({
+      const updatedProfile = {
         ...data,
-        role: data.role ?? { enumValue: profile!.role.enumValue },
-        branch: data.branch ?? { enumValue: profile!.branch.enumValue },
-        semester: data.semester ?? { enumValue: profile!.semester.enumValue },
-        year: data.year ?? { enumValue: profile!.year.enumValue }
-      });
+        role: data.role ?? profile?.role ?? { enumValue: "N/A" },
+        branch: data.branch ?? profile?.branch ?? { enumValue: "Not Assigned" },
+        semester: data.semester ??
+          profile?.semester ?? { enumValue: "Not Assigned" },
+        year: data.year ?? profile?.year ?? { enumValue: "Not Assigned" },
+      };
+
+      setProfile(updatedProfile);
+
+      sessionStorage.setItem("studentProfile", JSON.stringify(updatedProfile));
 
       toast.success("Profile updated successfully !");
 
@@ -100,7 +129,7 @@ function StudentProfileCard() {
     }
   };
 
-  if (Loading) return <div>Loading Profile...</div>;
+  if (loading) return <div>Loading Profile...</div>;
 
   if (!profile) return null;
 

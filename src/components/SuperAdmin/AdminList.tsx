@@ -21,13 +21,28 @@ function AdminList({ search }: AdminListProps) {
 
   // Fetch admins
   useEffect(() => {
+    const cacheKey = `admins_page_${page}_search_${search}`;
+
+    const storedAdmins = sessionStorage.getItem(cacheKey);
+
+    if (storedAdmins) {
+      const data = JSON.parse(storedAdmins);
+      setAdmins(data.admins);
+      setTotalPages(data.totalPages);
+      setLoading(false);
+      return;
+    }
+
     const fetchAdmins = async () => {
       try {
         const data = await getAllAdmins(page, limit, search);
         console.log("Admins data:", data);
-        
+
         setAdmins(data.admins);
         setTotalPages(data.totalPages);
+
+        // Save to sessionStorage
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
       } catch (error: any) {
         console.error("Error fetching admins data: ", error);
       } finally {
